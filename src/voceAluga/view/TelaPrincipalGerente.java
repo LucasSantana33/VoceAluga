@@ -9,12 +9,12 @@ package voceAluga.view;
  *
  * @author lucas
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaPrincipalGerente extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaiPrincipal2
      */
-    public TelaPrincipal() {
+    public TelaPrincipalGerente() {
         initComponents();
     }
 
@@ -34,7 +34,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItemConsultar = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemCliente = new javax.swing.JMenuItem();
-        jMenuItemFilial = new javax.swing.JMenuItem();
         jMenuFuncionario = new javax.swing.JMenuItem();
         jMenuItemVeiculo = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
@@ -66,11 +65,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItemCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuItemCliente.setText("Cliente");
         jMenuCadastro.add(jMenuItemCliente);
-
-        jMenuItemFilial.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jMenuItemFilial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
-        jMenuItemFilial.setText("Filial");
-        jMenuCadastro.add(jMenuItemFilial);
 
         jMenuFuncionario.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
@@ -125,21 +119,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                new TelaPrincipalGerente().setVisible(true);
             }
         });
     }
@@ -152,7 +148,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemAlugar;
     private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemConsultar;
-    private javax.swing.JMenuItem jMenuItemFilial;
     private javax.swing.JMenuItem jMenuItemVeiculo;
     private javax.swing.JMenu jMenuLocacao;
     private javax.swing.JMenu jMenuSair;
