@@ -107,6 +107,8 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         // TODO add your handling code here:
+        TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
+        telaMenu.setVisible(true);
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**

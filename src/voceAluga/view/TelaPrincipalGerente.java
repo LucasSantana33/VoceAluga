@@ -64,16 +64,31 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         jMenuItemCliente.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuItemCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuItemCliente.setText("Cliente");
+        jMenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClienteActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItemCliente);
 
         jMenuFuncionario.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuFuncionario.setText("Funcionário");
+        jMenuFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFuncionarioActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuFuncionario);
 
         jMenuItemVeiculo.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuItemVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuItemVeiculo.setText("Veículo");
+        jMenuItemVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVeiculoActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItemVeiculo);
 
         jMenuBar1.add(jMenuCadastro);
@@ -101,6 +116,25 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
+        TelaCadCliente cadastroCliente = new TelaCadCliente();
+        cadastroCliente.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemClienteActionPerformed
+
+    private void jMenuFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFuncionarioActionPerformed
+        TelaCadastroFuncionario cadastroFuncionario = new TelaCadastroFuncionario();
+        cadastroFuncionario.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuFuncionarioActionPerformed
+
+    private void jMenuItemVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVeiculoActionPerformed
+        TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
+        cadastroVeiculo.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemVeiculoActionPerformed
 
     /**
      * @param args the command line arguments
