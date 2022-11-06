@@ -49,7 +49,8 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         setResizable(false);
 
         jLabelTitulo.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabelTitulo.setText("Cadastro Veículo");
+        jLabelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/car.png"))); // NOI18N
+        jLabelTitulo.setText("Cadastro De Veículo");
 
         jPanelCadstroVeiculo.setBackground(new java.awt.Color(102, 102, 102));
         jPanelCadstroVeiculo.setPreferredSize(new java.awt.Dimension(780, 400));
@@ -141,7 +142,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                         .addComponent(jButtonCancelar)
                         .addGap(89, 89, 89)
                         .addComponent(jButtonConsultar)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanelCadstroVeiculoLayout.setVerticalGroup(
             jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,30 +173,30 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                     .addComponent(jButtonLimpar)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonConsultar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTitulo)
-                .addGap(304, 304, 304))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jPanelCadstroVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(259, 259, 259)
+                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelCadstroVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelTitulo)
+                .addGap(59, 59, 59)
+                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelCadstroVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(511, Short.MAX_VALUE))
+                .addComponent(jPanelCadstroVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();

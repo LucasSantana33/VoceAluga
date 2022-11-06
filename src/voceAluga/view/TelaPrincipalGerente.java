@@ -34,7 +34,6 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         jMenuItemConsultar = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemCliente = new javax.swing.JMenuItem();
-        jMenuFuncionario = new javax.swing.JMenuItem();
         jMenuItemVeiculo = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
 
@@ -71,16 +70,6 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jMenuItemCliente);
 
-        jMenuFuncionario.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jMenuFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
-        jMenuFuncionario.setText("Funcionário");
-        jMenuFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFuncionarioActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jMenuFuncionario);
-
         jMenuItemVeiculo.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuItemVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuItemVeiculo.setText("Veículo");
@@ -95,6 +84,11 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
 
         jMenuSair.setText("Sair");
         jMenuSair.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jMenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuSairMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenuSair);
 
         setJMenuBar(jMenuBar1);
@@ -123,18 +117,17 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
-    private void jMenuFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFuncionarioActionPerformed
-        TelaCadastroFuncionario cadastroFuncionario = new TelaCadastroFuncionario();
-        cadastroFuncionario.setVisible(true);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuFuncionarioActionPerformed
-
     private void jMenuItemVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVeiculoActionPerformed
         TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
         cadastroVeiculo.setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemVeiculoActionPerformed
+
+    private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
+        System.exit(0);
+    // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuSairMouseClicked
 
     /**
      * @param args the command line arguments
@@ -178,7 +171,6 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastro;
-    private javax.swing.JMenuItem jMenuFuncionario;
     private javax.swing.JMenuItem jMenuItemAlugar;
     private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemConsultar;
