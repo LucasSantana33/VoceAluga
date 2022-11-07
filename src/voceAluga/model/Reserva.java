@@ -20,7 +20,6 @@ public class Reserva {
     private String filialRetorno;
     private String filialRetirada;
     private Cliente cliente;
-    private Funcionario funcionanrio;
     private Filial filial;
     private Veiculo veiculo;
     

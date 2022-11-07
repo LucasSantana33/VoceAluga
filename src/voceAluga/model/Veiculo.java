@@ -19,7 +19,6 @@ public class Veiculo {
     private Integer qtdLugares;
     private String fabricante;
     private String placa;
-    private EstadoVeiculo estadoVeiculo;
     private Filial filial;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
     

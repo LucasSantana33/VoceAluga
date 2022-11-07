@@ -5,17 +5,30 @@
  */
 package voceAluga.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import voceAluga.controller.clienteController;
+
+
+
 /**
  *
  * @author lucas
  */
 public class TelaCadCliente extends javax.swing.JFrame {
+    private final clienteController controller;
+
 
     /**
      * Creates new form TelaCadCliente
      */
     public TelaCadCliente() {
         initComponents();
+        controller = new clienteController(this);
     }
 
     /**
@@ -123,6 +136,11 @@ public class TelaCadCliente extends javax.swing.JFrame {
 
         jButtonSalvar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jButtonLimpar.setText("Limpar");
@@ -200,11 +218,12 @@ public class TelaCadCliente extends javax.swing.JFrame {
                     .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEndereco, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(55, 55, 55)
-                .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConsultar)
-                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonConsultar)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53))
         );
 
@@ -237,6 +256,14 @@ public class TelaCadCliente extends javax.swing.JFrame {
     private void jFormattedTextFieldDtNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDtNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldDtNascimentoActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        try {
+            controller.insere();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +300,54 @@ public class TelaCadCliente extends javax.swing.JFrame {
         });
     }
 
+    public JFormattedTextField getjFormattedTextFieldCnh() {
+        return jFormattedTextFieldCnh;
+    }
+
+    public void setjFormattedTextFieldCnh(JFormattedTextField jFormattedTextFieldCnh) {
+        this.jFormattedTextFieldCnh = jFormattedTextFieldCnh;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCpf() {
+        return jFormattedTextFieldCpf;
+    }
+
+    public void setjFormattedTextFieldCpf(JFormattedTextField jFormattedTextFieldCpf) {
+        this.jFormattedTextFieldCpf = jFormattedTextFieldCpf;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDtNascimento() {
+        return jFormattedTextFieldDtNascimento;
+    }
+
+    public void setjFormattedTextFieldDtNascimento(JFormattedTextField jFormattedTextFieldDtNascimento) {
+        this.jFormattedTextFieldDtNascimento = jFormattedTextFieldDtNascimento;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldTelefone() {
+        return jFormattedTextFieldTelefone;
+    }
+
+    public void setjFormattedTextFieldTelefone(JFormattedTextField jFormattedTextFieldTelefone) {
+        this.jFormattedTextFieldTelefone = jFormattedTextFieldTelefone;
+    }
+
+    public JTextField getjTextFieldEndereco() {
+        return jTextFieldEndereco;
+    }
+
+    public void setjTextFieldEndereco(JTextField jTextFieldEndereco) {
+        this.jTextFieldEndereco = jTextFieldEndereco;
+    }
+
+    public JTextField getjTextFieldNome() {
+        return jTextFieldNome;
+    }
+
+    public void setjTextFieldNome(JTextField jTextFieldNome) {
+        this.jTextFieldNome = jTextFieldNome;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConsultar;

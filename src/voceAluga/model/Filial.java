@@ -21,6 +21,7 @@ public class Filial {
     private String senha;
     private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
     public Integer getIdFilial() {
         return idFilial;
@@ -84,6 +85,13 @@ public class Filial {
 
     public void setReservas(ArrayList<Reserva> reservas) {
         this.reservas = reservas;
+    }
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
     public Filial(String login, String senha) {
