@@ -5,17 +5,26 @@
  */
 package voceAluga.view;
 
+import javax.swing.JTextField;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import voceAluga.controller.veiculoController;
 /**
  *
  * @author Rhuan
  */
 public class TelaCadastroVeiculo extends javax.swing.JFrame {
-
+    private final veiculoController controller;
     /**
      * Creates new form TelaCadastroVeiculo
      */
     public TelaCadastroVeiculo() {
         initComponents();
+        controller = new veiculoController(this);
     }
 
     /**
@@ -43,6 +52,8 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         jButtonLimpar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonConsultar = new javax.swing.JButton();
+        jLabelValorDiaria = new javax.swing.JLabel();
+        jTextFieldValorDiaria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Veiculo");
@@ -92,6 +103,11 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
 
         jButtonSalvar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButtonLimpar.setText("Limpar");
@@ -102,6 +118,12 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         jButtonConsultar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButtonConsultar.setText("Consultar");
 
+        jLabelValorDiaria.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabelValorDiaria.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelValorDiaria.setText("Valor da diária:");
+
+        jTextFieldValorDiaria.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanelCadstroVeiculoLayout = new javax.swing.GroupLayout(jPanelCadstroVeiculo);
         jPanelCadstroVeiculo.setLayout(jPanelCadstroVeiculoLayout);
         jPanelCadstroVeiculoLayout.setHorizontalGroup(
@@ -109,40 +131,43 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                 .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelModelo)
-                            .addComponent(jLabelCor))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
-                            .addComponent(jTextFieldCor)))
+                        .addGap(98, 98, 98)
+                        .addComponent(jButtonSalvar)
+                        .addGap(95, 95, 95)
+                        .addComponent(jButtonLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar)
+                        .addGap(90, 90, 90)
+                        .addComponent(jButtonConsultar))
                     .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addComponent(jLabelFabricante)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelCor)
+                                    .addComponent(jLabelModelo))
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldCor, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldModelo)))
                             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                                 .addComponent(jLabelqtdLugares)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldqtdLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldqtdLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabelPlaca)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jButtonSalvar)
-                        .addGap(100, 100, 100)
-                        .addComponent(jButtonLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar)
-                        .addGap(89, 89, 89)
-                        .addComponent(jButtonConsultar)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                                .addComponent(jLabelValorDiaria)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelFabricante)
+                                    .addComponent(jLabelPlaca))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldPlaca))))
+                        .addGap(69, 69, 69)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCadstroVeiculoLayout.setVerticalGroup(
             jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,13 +192,17 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                 .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPlaca)
                     .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
+                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelValorDiaria)
+                    .addComponent(jTextFieldValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonLimpar)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonConsultar))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,7 +215,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelCadstroVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addComponent(jPanelCadstroVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -202,6 +231,14 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        try {
+            controller.insere();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +276,54 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         });
     }
 
+    public JTextField getjTextFieldCor() {
+        return jTextFieldCor;
+    }
+
+    public void setjTextFieldCor(JTextField jTextFieldCor) {
+        this.jTextFieldCor = jTextFieldCor;
+    }
+
+    public JTextField getjTextFieldFabricante() {
+        return jTextFieldFabricante;
+    }
+
+    public void setjTextFieldFabricante(JTextField jTextFieldFabricante) {
+        this.jTextFieldFabricante = jTextFieldFabricante;
+    }
+
+    public JTextField getjTextFieldModelo() {
+        return jTextFieldModelo;
+    }
+
+    public void setjTextFieldModelo(JTextField jTextFieldModelo) {
+        this.jTextFieldModelo = jTextFieldModelo;
+    }
+
+    public JTextField getjTextFieldPlaca() {
+        return jTextFieldPlaca;
+    }
+
+    public void setjTextFieldPlaca(JTextField jTextFieldPlaca) {
+        this.jTextFieldPlaca = jTextFieldPlaca;
+    }
+
+    public JTextField getjTextFieldValorDiaria() {
+        return jTextFieldValorDiaria;
+    }
+
+    public void setjTextFieldValorDiaria(JTextField jTextFieldValorDiaria) {
+        this.jTextFieldValorDiaria = jTextFieldValorDiaria;
+    }
+
+    public JTextField getjTextFieldqtdLugares() {
+        return jTextFieldqtdLugares;
+    }
+
+    public void setjTextFieldqtdLugares(JTextField jTextFieldqtdLugares) {
+        this.jTextFieldqtdLugares = jTextFieldqtdLugares;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConsultar;
@@ -249,12 +334,14 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelPlaca;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelValorDiaria;
     private javax.swing.JLabel jLabelqtdLugares;
     private javax.swing.JPanel jPanelCadstroVeiculo;
     private javax.swing.JTextField jTextFieldCor;
     private javax.swing.JTextField jTextFieldFabricante;
     private javax.swing.JTextField jTextFieldModelo;
     private javax.swing.JTextField jTextFieldPlaca;
+    private javax.swing.JTextField jTextFieldValorDiaria;
     private javax.swing.JTextField jTextFieldqtdLugares;
     // End of variables declaration//GEN-END:variables
 }
