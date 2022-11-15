@@ -17,6 +17,8 @@ import voceAluga.model.Cliente;
 import voceAluga.model.Filial;
 import voceAluga.model.Veiculo;
 import voceAluga.view.TelaLogin3;
+import voceAluga.dao.FilialDAO;
+import voceAluga.controller.loginController;
 
 
 /**
@@ -30,10 +32,10 @@ public class VeiculoDAO{
  
      this.connection = connection;
  }
-
     public void insert(Veiculo veiculo) throws SQLException {
+        //int idFilial = filialDao.pegaid(usuarioAutenticar);
        String sql = "insert into veiculo(modelo,cor,qtdLugares,fabricante,placa,estadoVeiculo,valorDiaria,idFilial)"
-                + "values(?,?,?,?,?,'Disponivel',?,'1')"; // falta arrumar a questão do idFilial. 
+                + "values(?,?,?,?,?,'Disponivel',?,null)"; // falta arrumar a questão do idFilial. 
        PreparedStatement statement = connection.prepareStatement(sql);
        statement.setString(1, veiculo.getModelo());
        statement.setString(2, veiculo.getCor());
@@ -41,8 +43,11 @@ public class VeiculoDAO{
        statement.setString(4, veiculo.getFabricante());
        statement.setString(5, veiculo.getPlaca());
        statement.setDouble(6,veiculo.getValorDiaria());
+       
+       //statement.setString(7,"Select idFilial from Filial where login = '"+usuario.getLogin()+"'");
        statement.execute();
        connection.close();
         
     }
+    
 }

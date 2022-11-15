@@ -12,7 +12,9 @@ import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import voceAluga.controller.idController;
 import voceAluga.controller.veiculoController;
+import voceAluga.view.TelaLogin3;
 /**
  *
  * @author Rhuan
@@ -26,7 +28,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         initComponents();
         controller = new veiculoController(this);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -235,6 +237,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
             controller.insere();
+            controller.updateid();
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,7 +278,6 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
             }
         });
     }
-
     public JTextField getjTextFieldCor() {
         return jTextFieldCor;
     }

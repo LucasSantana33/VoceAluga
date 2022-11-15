@@ -98,5 +98,6 @@ public class Filial {
         this.login = login;
         this.senha = senha;
     }
+
     
 }

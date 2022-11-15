@@ -34,8 +34,10 @@ public class loginController {
         // verificar se existe no Banco de dados
         Connection conexao = new conexao().getConnection();
         FilialDAO filialDao = new FilialDAO(conexao);
-        
+        //int idFilial = filialDao.pegaid(usuarioAutenticar);
+        //filialDao.updateid(usuarioAutenticar);
         boolean existe = filialDao.ExisteNoBancoUsuarioESenha(usuarioAutenticar);
+        //System.out.println(idFilial); 
         // se existir direciona para menu
         if (existe){
          TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();

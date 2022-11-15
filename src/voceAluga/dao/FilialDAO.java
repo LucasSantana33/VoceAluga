@@ -33,4 +33,29 @@ public class FilialDAO {
      ResultSet resultSet = statement.getResultSet();
      return resultSet.next();
     }
+    
+    public int pegaid(Filial usuario) throws SQLException {
+        int idFilial = 0;
+        String sql = " Select idFilial from Filial where login = '"+usuario.getLogin()+"'";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.execute();
+        ResultSet resultSet = statement.getResultSet();
+        while(resultSet.next()) {
+            idFilial = resultSet.getInt("idFilial");
+       }
+        return idFilial;
+    }
+    public void updateid(Filial usuario) throws SQLException {
+        int idFilial = 0;
+        String sql = " Select idFilial from Filial where login = '"+usuario.getLogin()+"'";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.execute();
+        ResultSet resultSet = statement.getResultSet();
+        while(resultSet.next()) {
+            idFilial = resultSet.getInt("idFilial");
+        }
+        String sql2 = "Update veiculo Set idFilial = '"+idFilial+"' where idFilial is null";
+        PreparedStatement statementi = connection.prepareStatement(sql2);
+        statementi.execute();
+    }
 }

@@ -19,21 +19,20 @@ public class Veiculo {
     private Integer qtdLugares;
     private String fabricante;
     private String placa;
-    private Filial idFilial;
+    private Filial filial;
     private double valorDiaria;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
-    public Veiculo(String modelo, String cor, Integer qtdLugares, String fabricante, String placa,double valorDiaria) {
+    public Veiculo(String modelo, String cor, Integer qtdLugares, String fabricante, String placa,Filial filial,double valorDiaria) {
         this.modelo = modelo;
         this.cor = cor;
         this.qtdLugares = qtdLugares;
         this.fabricante = fabricante;
         this.placa = placa;
-        this.idFilial = idFilial;
+        this.filial = filial;
         this.valorDiaria = valorDiaria;
     }
-    
-    
+
     public Integer getIdVeiculo() {
         return idVeiculo;
     }
@@ -82,12 +81,12 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public Filial getIdFilial() {
-        return idFilial;
+    public Filial getFilial() {
+        return filial;
     }
 
-    public void setIdFilial(Filial idFilial) {
-        this.idFilial = idFilial;
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
 
     public double getValorDiaria() {
@@ -105,7 +104,9 @@ public class Veiculo {
     public void setReservas(ArrayList<Reserva> reservas) {
         this.reservas = reservas;
     }
-
+    
+    
+   
    
 
     

@@ -12,6 +12,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import voceAluga.controller.loginController;
+import voceAluga.controller.veiculoController;
 
 /**
  *
@@ -20,6 +21,7 @@ import voceAluga.controller.loginController;
 public class TelaLogin3 extends javax.swing.JFrame {
     
     private final loginController controller;
+    
 
     /**
      * Creates new form TelaLogin3
@@ -50,16 +52,10 @@ public class TelaLogin3 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextFieldUsuario.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUsuarioActionPerformed(evt);
-            }
-        });
         getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 161, 168, 30));
 
         jPasswordFieldSenha.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -103,10 +99,6 @@ public class TelaLogin3 extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         try {
@@ -179,7 +171,7 @@ public class TelaLogin3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelUsuario;
-    private javax.swing.JPasswordField jPasswordFieldSenha;
-    private javax.swing.JTextField jTextFieldUsuario;
+    public javax.swing.JPasswordField jPasswordFieldSenha;
+    public javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }
