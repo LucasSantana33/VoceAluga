@@ -112,12 +112,14 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
+        this.dispose();
         TelaCadCliente cadastroCliente = new TelaCadCliente();
         cadastroCliente.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     private void jMenuItemVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVeiculoActionPerformed
+        this.dispose();
         TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
         cadastroVeiculo.setVisible(true);
 
@@ -125,7 +127,9 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemVeiculoActionPerformed
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
-        System.exit(0);
+        this.dispose();
+        TelaLogin3 telalogin = new TelaLogin3();
+        telalogin.setVisible(true);
     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuSairMouseClicked
 
@@ -178,4 +182,6 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuLocacao;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables
+   
+
 }

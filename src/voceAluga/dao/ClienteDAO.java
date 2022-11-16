@@ -32,9 +32,15 @@ public class ClienteDAO {
 
     public void insert(Cliente cliente) throws SQLException {
        String sql = "insert into cliente(nome,telefone,dataNasc,numCartMotorista,cpf,endereco,idFilial)"
-                + "values('"+cliente.getNome()+"','"+cliente.getTelefone()+"','"+cliente.getDataNasc()+"','"+cliente.getNumCartMotorista()+"',"
-               + "'"+cliente.getCpf()+"','"+cliente.getEndereco()+"','1')"; // falta arrumar a questão do idFilial. 
+                + "values(?,?,?,?,?,?,?)";// falta arrumar a questão do idFilial. 
        PreparedStatement statement = connection.prepareStatement(sql);
+       statement.setString(1, cliente.getNome());
+       statement.setString(2, cliente.getTelefone());
+       statement.setString(3,cliente.getDataNasc());
+       statement.setString(4, cliente.getNumCartMotorista());
+       statement.setString(5, cliente.getCpf());
+       statement.setString(6,cliente.getEndereco());
+       statement.setInt(7,cliente.getIdFilial());
        statement.execute();
        connection.close();
         

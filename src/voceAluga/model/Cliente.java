@@ -21,10 +21,10 @@ public class Cliente {
     private String numCartMotorista;
     private String cpf;
     private String endereco;
-    private Filial idFilial;
+    private int idFilial;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
-    public Cliente(String nome, String telefone, String dataNasc, String numCartMotorista, String cpf, String endereco) {
+    public Cliente(String nome, String telefone, String dataNasc, String numCartMotorista, String cpf, String endereco, int idFilial) {
         this.nome = nome;
         this.telefone = telefone;
         this.dataNasc = dataNasc;
@@ -33,10 +33,7 @@ public class Cliente {
         this.endereco = endereco;
         this.idFilial = idFilial;
     }
-
     
-    
-
     public Integer getIdCliente() {
         return idCliente;
     }
@@ -93,11 +90,11 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public Filial getIdFilial() {
+    public int getIdFilial() {
         return idFilial;
     }
 
-    public void setIdFilial(Filial idFilial) {
+    public void setIdFilial(int idFilial) {
         this.idFilial = idFilial;
     }
 
@@ -109,6 +106,10 @@ public class Cliente {
         this.reservas = reservas;
     }
 
+    
+    
+
+    
     
     
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static voceAluga.controller.loginController.id_filial;
 import voceAluga.dao.FilialDAO;
 import voceAluga.dao.VeiculoDAO;
 import voceAluga.dao.conexao;
@@ -34,7 +35,7 @@ public class veiculoController {
         int qtdLugares = Integer.parseInt(view1.getjTextFieldqtdLugares().getText());
         String fabricante = view1.getjTextFieldFabricante().getText();
         String placa = view1.getjTextFieldPlaca().getText();
-        Filial idFilial =null;
+        int idFilial =id_filial;
         double valorDiaria = Double.parseDouble(view1.getjTextFieldValorDiaria().getText()) ;
         Veiculo veiculoInsert = new Veiculo(modelo,cor,qtdLugares,fabricante,placa,idFilial,valorDiaria);
         // verificar se existe no Banco de dados
@@ -43,26 +44,11 @@ public class veiculoController {
         VeiculoDAO veiculoDao = new VeiculoDAO(conexao);
         veiculoDao.insert(veiculoInsert);
         JOptionPane.showMessageDialog(null,"Veiculo Cadastrado com sucesso!!!");
+        //JOptionPane.showMessageDialog(null,id_filial);
         }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao cadastrar veiculo!!!");
             Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         }
-    public void updateid() throws SQLException{
-        TelaLogin3 telalogin = new TelaLogin3();
-        String usuario2 = telalogin.getjTextFieldUsuario().getText();
-        String senha2 = telalogin.getjPasswordFieldSenha().getText(); //"admin";
-        Filial usuarioAutenticado = new Filial(usuario2,senha2);
-        // verificar se existe no Banco de dados
-        try{    
-        Connection conexao = new conexao().getConnection();
-        FilialDAO filialDao = new FilialDAO(conexao);
-        filialDao.updateid(usuarioAutenticado);
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar veiculo " +usuario2+ " "+senha2+"!!!");
-            Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    }
     }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static voceAluga.controller.loginController.id_filial;
 import voceAluga.dao.ClienteDAO;
 import voceAluga.dao.FilialDAO;
 import voceAluga.dao.conexao;
@@ -34,9 +35,9 @@ public class clienteController {
         String telefone = view.getjFormattedTextFieldTelefone().getText();
         String numCartMotorista = view.getjFormattedTextFieldCnh().getText();
         String endereco = view.getjTextFieldEndereco().getText();
-     
+        int idFilial = id_filial;
         
-        Cliente clienteInsert = new Cliente(nome,telefone,dataNasc,numCartMotorista,cpf,endereco);
+        Cliente clienteInsert = new Cliente(nome,telefone,dataNasc,numCartMotorista,cpf,endereco,idFilial);
         // verificar se existe no Banco de dados
         try{
         Connection conexao = new conexao().getConnection();

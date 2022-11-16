@@ -146,11 +146,21 @@ public class TelaCadCliente extends javax.swing.JFrame {
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setMaximumSize(new java.awt.Dimension(69, 27));
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(69, 27));
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setMaximumSize(new java.awt.Dimension(69, 27));
         jButtonCancelar.setPreferredSize(new java.awt.Dimension(69, 27));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonConsultar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jButtonConsultar.setText("Consultar");
@@ -260,10 +270,22 @@ public class TelaCadCliente extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
             controller.insere();
+            limpaCampos();
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+            this.dispose();
+            TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
+            telaMenu.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        limpaCampos();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +368,15 @@ public class TelaCadCliente extends javax.swing.JFrame {
 
     public void setjTextFieldNome(JTextField jTextFieldNome) {
         this.jTextFieldNome = jTextFieldNome;
+    }
+     public void limpaCampos(){
+        jTextFieldNome.setText("");
+        jTextFieldEndereco.setText("");
+        jFormattedTextFieldTelefone.setText("");
+        jFormattedTextFieldDtNascimento.setText("");
+        jFormattedTextFieldCpf.setText("");
+        jFormattedTextFieldCnh.setText("");
+    
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,23 +13,23 @@ import voceAluga.dao.conexao;
 import voceAluga.model.Filial;  
 import voceAluga.view.TelaLogin3;
 import voceAluga.view.TelaPrincipalGerente;
-
+ 
 /**
  *
  * @author lucas
  */
 public class loginController {
     private TelaLogin3 view;
-
+    static int id_filial=0;
+    
     public loginController(TelaLogin3 view) {
         this.view = view;
     }
 
     public void autenticar() throws SQLException {
         // Buscar um Usuário da view
-        String usuario = view.getjTextFieldUsuario().getText();
-        String senha = view.getjPasswordFieldSenha().getText();
-        
+         String usuario = view.getjTextFieldUsuario().getText();
+         String senha = view.getjPasswordFieldSenha().getText();
         Filial usuarioAutenticar = new Filial(usuario,senha);
         // verificar se existe no Banco de dados
         Connection conexao = new conexao().getConnection();
@@ -39,7 +39,9 @@ public class loginController {
         boolean existe = filialDao.ExisteNoBancoUsuarioESenha(usuarioAutenticar);
         //System.out.println(idFilial); 
         // se existir direciona para menu
+        id_filial = filialDao.pegaid(usuarioAutenticar);
         if (existe){
+         view.dispose();
          TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
         telaMenu.setVisible(true);
         }else{
