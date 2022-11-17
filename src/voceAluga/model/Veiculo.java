@@ -5,7 +5,12 @@
  */
 package voceAluga.model;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import voceAluga.dao.Exceptiondao;
+import voceAluga.dao.VeiculoDAO;
+import voceAluga.dao.conexao;
 
 /**
  *
@@ -19,10 +24,14 @@ public class Veiculo {
     private Integer qtdLugares;
     private String fabricante;
     private String placa;
+     private String EstadoVeiculo;
     private int idFilial;
     private double valorDiaria;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-
+    
+    public Veiculo(){
+    
+    }
     public Veiculo(String modelo, String cor, Integer qtdLugares, String fabricante, String placa,int idFilial,double valorDiaria) {
         this.modelo = modelo;
         this.cor = cor;
@@ -33,6 +42,14 @@ public class Veiculo {
         this.valorDiaria = valorDiaria;
     }
 
+    public String getEstadoVeiculo() {
+        return EstadoVeiculo;
+    }
+
+    public void setEstadoVeiculo(String EstadoVeiculo) {
+        this.EstadoVeiculo = EstadoVeiculo;
+    }
+    
     public Integer getIdVeiculo() {
         return idVeiculo;
     }
@@ -104,12 +121,11 @@ public class Veiculo {
     public void setReservas(ArrayList<Reserva> reservas) {
         this.reservas = reservas;
     }
-
     
+    public  ArrayList<Veiculo> listarVeiculos(String nome)throws Exceptiondao, SQLException{
+        Connection conexao = new conexao().getConnection();
+        return new VeiculoDAO(conexao).listarVeiculos(nome);
     
-   
-   
-
-    
-    
+    }
+      
 }

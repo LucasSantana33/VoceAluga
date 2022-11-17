@@ -5,7 +5,18 @@
  */
 package voceAluga.view;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import voceAluga.controller.clienteController;
+import voceAluga.controller.veiculoController;
+import voceAluga.dao.Exceptiondao;
+import voceAluga.model.Cliente;
+import voceAluga.model.Veiculo;
 
 /**
  *
@@ -67,14 +78,14 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CPF", "Data de Nascimento", "CNH", "Endereço"
+                "Id Cliente", "Nome", "Telefone", "Data de Nascimento", "CNH", "CPF", "Endereço", "Id Filial"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -148,7 +159,27 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConsultarCliente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCliente
-        JOptionPane.showMessageDialog(null, "Consulta o nome do Cliente.");
+        String nome = jTextFieldNomeCliente.getText();
+        DefaultTableModel tableModel = (DefaultTableModel) jTableConsultaCliente.getModel();
+        tableModel.setRowCount(0);
+        clienteController clienteController = new clienteController();
+        try {
+            ArrayList<Cliente> clientes = clienteController.listarClientes(nome);
+            clientes.forEach((Cliente cliente)->{
+                tableModel.addRow(new Object[]{cliente.getIdCliente(),
+                                               cliente.getNome(),
+                                               cliente.getTelefone(),
+                                               cliente.getDataNasc(),
+                                               cliente.getNumCartMotorista(),
+                                               cliente.getCpf(),
+                                               cliente.getEndereco(),
+                                               cliente.getIdFilial()});
+            });    
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exceptiondao ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ConsultarCliente
 
     private void Fechar_Janela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Fechar_Janela
@@ -200,4 +231,14 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     private javax.swing.JTable jTableConsultaCliente;
     private javax.swing.JTextField jTextFieldNomeCliente;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getjTextFieldNomeCliente() {
+        return jTextFieldNomeCliente;
+    }
+
+    public void setjTextFieldNomeCliente(JTextField jTextFieldNomeCliente) {
+        this.jTextFieldNomeCliente = jTextFieldNomeCliente;
+    }
+
+
 }

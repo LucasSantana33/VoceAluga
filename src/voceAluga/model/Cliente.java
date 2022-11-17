@@ -5,8 +5,14 @@
  */
 package voceAluga.model;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import voceAluga.dao.ClienteDAO;
+import voceAluga.dao.Exceptiondao;
+import voceAluga.dao.VeiculoDAO;
+import voceAluga.dao.conexao;
 
 /**
  *
@@ -32,6 +38,10 @@ public class Cliente {
         this.cpf = cpf;
         this.endereco = endereco;
         this.idFilial = idFilial;
+    }
+
+    public Cliente() {
+        
     }
     
     public Integer getIdCliente() {
@@ -107,7 +117,11 @@ public class Cliente {
     }
 
     
+     public  ArrayList<Cliente> listarClientes(String nome)throws Exceptiondao, SQLException{
+        Connection conexao = new conexao().getConnection();
+        return new ClienteDAO(conexao).listarClientes(nome);
     
+    }
 
     
     

@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import voceAluga.controller.idController;
 import voceAluga.controller.veiculoController;
 import voceAluga.view.TelaLogin3;
+import voceAluga.view.TelaConsultaVeiculo;
 /**
  *
  * @author Rhuan
@@ -129,6 +130,11 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
 
         jButtonConsultar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButtonConsultar.setText("Consultar");
+        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarActionPerformed(evt);
+            }
+        });
 
         jLabelValorDiaria.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabelValorDiaria.setForeground(new java.awt.Color(255, 255, 255));
@@ -263,6 +269,12 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         limpaCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+        TelaConsultaVeiculo telaconsultaveiculo = new TelaConsultaVeiculo();
+        telaconsultaveiculo.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     /**
      * @param args the command line arguments

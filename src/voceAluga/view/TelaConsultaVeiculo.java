@@ -5,7 +5,16 @@
  */
 package voceAluga.view;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import voceAluga.controller.veiculoController;
+import voceAluga.dao.Exceptiondao;
+import voceAluga.model.Veiculo;
 
 /**
  *
@@ -13,15 +22,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaConsultaVeiculo extends javax.swing.JFrame {
 
-    private TelaCadastroVeiculo telaCadastroVeiculo;
     
     public TelaConsultaVeiculo() {
         initComponents();
-    }
-
-    public TelaConsultaVeiculo(TelaCadastroVeiculo telaCadastroVeiculo){
-    this.telaCadastroVeiculo = telaCadastroVeiculo;    
-    initComponents();
     }
     
     
@@ -53,7 +56,6 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
         jTextFieldTituloVeiculo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jTextFieldTituloVeiculo.setToolTipText("Informe o Veículo que deseja consultar !");
 
-        jButtonConsultarVeiculo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lucas Silva\\Downloads\\lupa (2).jpg")); // NOI18N
         jButtonConsultarVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarVeiculo(evt);
@@ -66,14 +68,14 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Modelo", "Cor", "Quantidade De Lugares", "Fabricante", "Placa"
+                "IDVeiculo", "Modelo", "Cor", "Quantidade De Lugares", "Fabricante", "Placa", "Estado_veiculo", "Valor Diaria", "ID Filial"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -148,12 +150,34 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConsultarVeiculo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarVeiculo
-        JOptionPane.showMessageDialog(null, "Consulta De Veículo.");
+        String nome = jTextFieldTituloVeiculo.getText();
+        DefaultTableModel tableModel = (DefaultTableModel) jTableConsultaVeiculo.getModel();
+        tableModel.setRowCount(0);
+        veiculoController veiculoController = new veiculoController();
+        try {
+            ArrayList<Veiculo> veiculos = veiculoController.listarVeiculos(nome);
+            veiculos.forEach((Veiculo veiculo)->{
+                tableModel.addRow(new Object[]{veiculo.getIdVeiculo(),
+                                               veiculo.getModelo(),
+                                               veiculo.getCor(),
+                                               veiculo.getQtdLugares(),
+                                               veiculo.getFabricante(),
+                                               veiculo.getPlaca(),
+                                               veiculo.getEstadoVeiculo(),
+                                               veiculo.getValorDiaria(),
+                                               veiculo.getIdFilial()});
+            });    
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exceptiondao ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ConsultarVeiculo
 
     private void Fechar_Janela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Fechar_Janela
         this.dispose();
-        this.telaCadastroVeiculo.setVisible(true);
+        TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
+        cadastroVeiculo.setVisible(true);
     }//GEN-LAST:event_Fechar_Janela
 
     /**
@@ -189,6 +213,14 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
                 new TelaConsultaVeiculo().setVisible(true);
             }
         });
+    }
+
+    public JTextField getjTextFieldTituloVeiculo() {
+        return jTextFieldTituloVeiculo;
+    }
+
+    public void setjTextFieldTituloVeiculo(JTextField jTextFieldTituloVeiculo) {
+        this.jTextFieldTituloVeiculo = jTextFieldTituloVeiculo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

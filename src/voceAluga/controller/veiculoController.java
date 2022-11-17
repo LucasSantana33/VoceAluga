@@ -1,10 +1,12 @@
 package voceAluga.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static voceAluga.controller.loginController.id_filial;
+import voceAluga.dao.Exceptiondao;
 import voceAluga.dao.FilialDAO;
 import voceAluga.dao.VeiculoDAO;
 import voceAluga.dao.conexao;
@@ -21,13 +23,12 @@ import voceAluga.view.TelaPrincipalGerente;
  */
 
 public class veiculoController {
-    private TelaLogin3 view2;
     private TelaCadastroVeiculo view1;
     public veiculoController(TelaCadastroVeiculo view1) {
         this.view1 = view1;
     }
-    public veiculoController(TelaLogin3 view2) {
-        this.view2 = view2;
+
+    public veiculoController() {
     }
     public void insere() throws SQLException {
         String modelo = view1.getjTextFieldModelo().getText();
@@ -51,4 +52,8 @@ public class veiculoController {
         }
         
         }
+    
+    public ArrayList<Veiculo> listarVeiculos(String nome)throws Exceptiondao, SQLException{
+        return new Veiculo().listarVeiculos(nome);
+    }
     }

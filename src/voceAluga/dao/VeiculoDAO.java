@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import voceAluga.model.Cliente;
@@ -18,6 +19,7 @@ import voceAluga.model.Filial;
 import voceAluga.model.Veiculo;
 import voceAluga.view.TelaLogin3;
 import voceAluga.dao.FilialDAO;
+import voceAluga.dao.Exceptiondao;
 import voceAluga.controller.loginController;
 //import static voceAluga.controller.loginController.id_filial;
 
@@ -48,6 +50,51 @@ public class VeiculoDAO{
        statement.execute();
        connection.close();
         
+    }
+    
+    public ArrayList<Veiculo> listarVeiculos(String nome)throws SQLException, Exceptiondao{
+        String sql = "select * from veiculo where modelo like '"+ nome +"%' order by modelo";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ArrayList<Veiculo> veiculos = null;
+        try{
+        connection = new conexao().getConnection();
+        statement = connection.prepareStatement(sql);
+        ResultSet Rs = statement.executeQuery(sql);
+        if (Rs!=null){
+            veiculos = new ArrayList<Veiculo>();
+            while(Rs.next()){
+                Veiculo veiculo = new Veiculo();
+                veiculo.setIdVeiculo(Rs.getInt("idVeiculo"));
+                veiculo.setModelo(Rs.getString("modelo"));
+                veiculo.setCor(Rs.getString("cor"));
+                veiculo.setQtdLugares(Rs.getInt("qtdLugares"));
+                veiculo.setFabricante(Rs.getString("fabricante"));
+                veiculo.setPlaca(Rs.getString("placa"));
+                veiculo.setEstadoVeiculo(Rs.getString("estadoVeiculo"));
+                veiculo.setValorDiaria(Rs.getDouble("valorDiaria"));
+                veiculo.setIdFilial(Rs.getInt("idFilial"));
+                veiculos.add(veiculo);
+                
+                
+            }
+        
+        }
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao consultar Veiculos: " + e);
+        }finally{
+           try{
+            if(statement!=null){statement.close();}
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao fechar statement: " + e);
+        }
+           try{
+            if(connection!=null){connection.close();}
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao fechar conexão: " + e);
+        }
+        }
+        return veiculos;
     }
     
 }

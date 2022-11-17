@@ -2,15 +2,18 @@
 package voceAluga.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static voceAluga.controller.loginController.id_filial;
 import voceAluga.dao.ClienteDAO;
+import voceAluga.dao.Exceptiondao;
 import voceAluga.dao.FilialDAO;
 import voceAluga.dao.conexao;
 import voceAluga.model.Cliente;
 import voceAluga.model.Filial;
+import voceAluga.model.Veiculo;
 import voceAluga.view.TelaCadCliente;
 import voceAluga.view.TelaLogin3;
 import voceAluga.view.TelaPrincipalGerente;
@@ -25,6 +28,9 @@ public class clienteController {
 
     public clienteController(TelaCadCliente view) {
         this.view = view;
+    }
+    public clienteController(){
+    
     }
 
     public void insere() throws SQLException {
@@ -49,4 +55,8 @@ public class clienteController {
         }
         
         }
+    
+     public ArrayList<Cliente> listarClientes(String nome)throws Exceptiondao, SQLException{
+        return new Cliente().listarClientes(nome);
+    }
     }
