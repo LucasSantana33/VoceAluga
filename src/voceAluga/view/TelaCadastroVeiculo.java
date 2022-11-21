@@ -10,10 +10,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import voceAluga.controller.idController;
 import voceAluga.controller.veiculoController;
+import voceAluga.dao.Exceptiondao;
 import voceAluga.view.TelaLogin3;
 import voceAluga.view.TelaConsultaVeiculo;
 /**
@@ -22,12 +24,23 @@ import voceAluga.view.TelaConsultaVeiculo;
  */
 public class TelaCadastroVeiculo extends javax.swing.JFrame {
     private final veiculoController controller;
+    static  int idVeiculo=0;
     /**
      * Creates new form TelaCadastroVeiculo
      */
     public TelaCadastroVeiculo() {
         initComponents();
         controller = new veiculoController(this);
+    }
+    public void buscarVeiculo(Integer idVeiculo,String modelo,String cor,Integer qtdLugares,String fabricante,String placa,double valorDiaria){
+        this.idVeiculo=idVeiculo;
+        this.jTextFieldModelo.setText(modelo);
+        this.jTextFieldCor.setText(cor);
+        this.jTextFieldqtdLugares.setText(Integer.toString(qtdLugares));
+        this.jTextFieldFabricante.setText(fabricante);
+        this.jTextFieldPlaca.setText(placa);
+        this.jTextFieldValorDiaria.setText(Double.toString(valorDiaria));
+        //JOptionPane.showMessageDialog(null,idVeiculo);
     }
     
     /**
@@ -57,6 +70,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
         jLabelValorDiaria = new javax.swing.JLabel();
         jTextFieldValorDiaria = new javax.swing.JTextField();
+        jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Veiculo");
@@ -142,49 +156,62 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
 
         jTextFieldValorDiaria.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
 
+        jButtonExcluir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCadstroVeiculoLayout = new javax.swing.GroupLayout(jPanelCadstroVeiculo);
         jPanelCadstroVeiculo.setLayout(jPanelCadstroVeiculoLayout);
         jPanelCadstroVeiculoLayout.setHorizontalGroup(
             jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jButtonSalvar)
-                        .addGap(95, 95, 95)
+                        .addGap(41, 41, 41)
                         .addComponent(jButtonLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                        .addGap(41, 41, 41)
                         .addComponent(jButtonCancelar)
-                        .addGap(90, 90, 90)
-                        .addComponent(jButtonConsultar))
+                        .addGap(42, 42, 42)
+                        .addComponent(jButtonConsultar)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                                 .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelCor)
-                                    .addComponent(jLabelModelo))
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldCor, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldModelo)))
-                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addComponent(jLabelqtdLugares)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldqtdLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelCor)
+                                            .addComponent(jLabelModelo))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldCor, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldModelo)))
+                                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                                        .addComponent(jLabelqtdLugares)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldqtdLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelFabricante)
+                                            .addComponent(jLabelPlaca))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldPlaca))))
+                                .addGap(69, 69, 69))
                             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
                                 .addComponent(jLabelValorDiaria)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelFabricante)
-                                    .addComponent(jLabelPlaca))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldPlaca))))
-                        .addGap(69, 69, 69)))
+                                .addComponent(jTextFieldValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCadstroVeiculoLayout.setVerticalGroup(
@@ -219,7 +246,8 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonLimpar)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonConsultar))
+                    .addComponent(jButtonConsultar)
+                    .addComponent(jButtonExcluir))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -251,14 +279,27 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        if(this.idVeiculo==0){
         try {
             controller.insere();
             limpaCampos();
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
-
+        else{
+            try {
+                controller.alterarVeiculo(idVeiculo);
+                idVeiculo=0;
+                limpaCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exceptiondao ex) {
+                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
        this.dispose();
        TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
@@ -275,6 +316,24 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         telaconsultaveiculo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        if(this.idVeiculo==0){
+        JOptionPane.showMessageDialog(null,"Erro, nenhum veiculo foi selecionado para exclusão");
+        
+    }                                             
+        else{
+            try {
+                controller.deletarVeiculo(idVeiculo);
+                limpaCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exceptiondao ex) {
+                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,12 +424,14 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         jTextFieldPlaca.setText("");
         jTextFieldFabricante.setText("");
         jTextFieldCor.setText("");
+        idVeiculo=0;
     
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabelCor;

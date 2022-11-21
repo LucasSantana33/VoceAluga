@@ -127,5 +127,12 @@ public class Veiculo {
         return new VeiculoDAO(conexao).listarVeiculos(nome);
     
     }
-      
+    public  void alterarVeiculo(Veiculo veiculo)throws Exceptiondao, SQLException{
+               Connection conexao = new conexao().getConnection();
+               new VeiculoDAO(conexao).AlterarVeiculo(veiculo);
+           }  
+    public  void deletarVeiculo(Veiculo veiculo)throws Exceptiondao, SQLException{
+               Connection conexao = new conexao().getConnection();
+               new VeiculoDAO(conexao).DeletarVeiculo(veiculo);
+           } 
 }

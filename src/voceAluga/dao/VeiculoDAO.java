@@ -96,5 +96,60 @@ public class VeiculoDAO{
         }
         return veiculos;
     }
+    public void AlterarVeiculo(Veiculo veiculo) throws SQLException, Exceptiondao {
+       String sql = "Update veiculo set modelo=?,cor=?,qtdLugares=?,fabricante=?"
+               + ",placa=?,valorDiaria=? where idVeiculo =?";
+       Connection connection = null;
+        PreparedStatement statement = null;
+       try{
+        connection = new conexao().getConnection();
+       statement = connection.prepareStatement(sql);
+       statement.setString(1, veiculo.getModelo());
+       statement.setString(2, veiculo.getCor());
+       statement.setInt(3,veiculo.getQtdLugares());
+       statement.setString(4, veiculo.getFabricante());
+       statement.setString(5, veiculo.getPlaca());
+       statement.setDouble(6,veiculo.getValorDiaria());
+       statement.setInt(7,veiculo.getIdVeiculo());
+       statement.execute();
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao alterar Veiculos: " + e);
+        }finally{
+           try{
+            if(statement!=null){statement.close();}
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao fechar statement: " + e);
+        }
+           try{
+            if(connection!=null){connection.close();}
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao fechar conexão: " + e);
+        }
+        }
+    }
     
+    public void DeletarVeiculo(Veiculo veiculo) throws SQLException, Exceptiondao {
+       String sql = "delete from veiculo where idVeiculo =?";
+       Connection connection = null;
+        PreparedStatement statement = null;
+       try{
+        connection = new conexao().getConnection();
+        statement = connection.prepareStatement(sql);
+       statement.setInt(1,veiculo.getIdVeiculo());
+       statement.execute();
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao deletar Veiculos: " + e);
+        }finally{
+           try{
+            if(statement!=null){statement.close();}
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao fechar statement: " + e);
+        }
+           try{
+            if(connection!=null){connection.close();}
+        }catch(SQLException e){
+            throw new Exceptiondao("Erro ao fechar conexão: " + e);
+        }
+        }
+    }
 }

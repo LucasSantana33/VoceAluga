@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import voceAluga.controller.veiculoController;
 import voceAluga.dao.Exceptiondao;
 import voceAluga.model.Veiculo;
+import static voceAluga.view.TelaCadastroVeiculo.idVeiculo;
 
 /**
  *
@@ -84,6 +85,11 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableConsultaVeiculo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableConsultaVeiculoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableConsultaVeiculo);
@@ -177,8 +183,25 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
     private void Fechar_Janela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Fechar_Janela
         this.dispose();
         TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
-        cadastroVeiculo.setVisible(true);
+        
+        //cadastroVeiculo.setVisible(true);
     }//GEN-LAST:event_Fechar_Janela
+
+    private void jTableConsultaVeiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaVeiculoMouseClicked
+        if(evt.getClickCount()==2){
+            Integer idVeiculo = (Integer)jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),0);
+            String modelo =(String) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),1);
+            String cor = (String) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),2);
+            Integer qtdLugares = (Integer)jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),3);
+            String fabricante = (String) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),4);
+            String placa = (String) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),5);
+            double valorDiaria = (double) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),7);
+            TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
+            cadastroVeiculo.buscarVeiculo(idVeiculo, modelo, cor, qtdLugares, fabricante, placa, valorDiaria);
+            cadastroVeiculo.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jTableConsultaVeiculoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -222,7 +245,7 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
     public void setjTextFieldTituloVeiculo(JTextField jTextFieldTituloVeiculo) {
         this.jTextFieldTituloVeiculo = jTextFieldTituloVeiculo;
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultarVeiculo;
     private javax.swing.JLabel jLabelConsultaVeiculo;

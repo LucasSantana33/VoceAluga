@@ -96,6 +96,11 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableConsultaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableConsultaClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableConsultaCliente);
 
         javax.swing.GroupLayout jPanelConsultaClienteLayout = new javax.swing.GroupLayout(jPanelConsultaCliente);
@@ -186,6 +191,22 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         this.dispose();
         //this.telaCadCliente.setVisible(true);
     }//GEN-LAST:event_Fechar_Janela
+
+    private void jTableConsultaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaClienteMouseClicked
+     if(evt.getClickCount()==2){
+            Integer idCliente = (Integer)jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),0);
+            String nome =(String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),1);
+            String telefone= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),2);
+            String dataNasc = (String)jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),3);
+            String cnh = (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),4);
+            String cpf= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),5);
+            String endereco= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),6);
+            TelaCadCliente cadastroCliente= new TelaCadCliente();
+            cadastroCliente.buscarCliente(idCliente, nome, telefone, dataNasc, cnh, cpf, endereco);
+            cadastroCliente.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jTableConsultaClienteMouseClicked
 
     /**
      * @param args the command line arguments

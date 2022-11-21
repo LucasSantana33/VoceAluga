@@ -21,6 +21,7 @@ import voceAluga.controller.clienteController;
  */
 public class TelaCadCliente extends javax.swing.JFrame {
     private final clienteController controller;
+    private static int idCliente=0;
 
 
     /**
@@ -297,7 +298,16 @@ public class TelaCadCliente extends javax.swing.JFrame {
         telaconsultacliente.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
-
+    public void buscarCliente(Integer idCliente,String nome,String telefone,String dataNasc,String cnh,String cpf,String endereco){
+        this.idCliente=idCliente;
+        this.jTextFieldNome.setText(nome);
+        this.jFormattedTextFieldTelefone.setText(telefone);
+        this.jFormattedTextFieldDtNascimento.setText(dataNasc);
+        this.jFormattedTextFieldCnh.setText(cnh);
+        this.jFormattedTextFieldCpf.setText(cpf);
+        this.jTextFieldEndereco.setText(endereco);
+        //JOptionPane.showMessageDialog(null,idVeiculo);
+    }
     /**
      * @param args the command line arguments
      */
