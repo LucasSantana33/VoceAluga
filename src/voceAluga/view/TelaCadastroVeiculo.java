@@ -291,7 +291,6 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         else{
             try {
                 controller.alterarVeiculo(idVeiculo);
-                idVeiculo=0;
                 limpaCampos();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,7 +300,8 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         }
     }
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-       this.dispose();
+        idVeiculo=0;
+        this.dispose();
        TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
         telaMenu.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed

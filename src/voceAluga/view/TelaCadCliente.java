@@ -9,9 +9,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import voceAluga.controller.clienteController;
+import voceAluga.dao.Exceptiondao;
 
 
 
@@ -58,7 +60,8 @@ public class TelaCadCliente extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonConsultar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
+        jButtonConsultar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Você aluga");
@@ -163,11 +166,19 @@ public class TelaCadCliente extends javax.swing.JFrame {
             }
         });
 
-        jButtonConsultar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jButtonConsultar.setText("Consultar");
-        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExcluir.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarActionPerformed(evt);
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonConsultar1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jButtonConsultar1.setText("Consultar");
+        jButtonConsultar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultar1ActionPerformed(evt);
             }
         });
 
@@ -186,7 +197,7 @@ public class TelaCadCliente extends javax.swing.JFrame {
                     .addComponent(jLabelEndereco, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelCpf, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelNome, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCadastroClienteLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +207,18 @@ public class TelaCadCliente extends javax.swing.JFrame {
                                 .addComponent(jFormattedTextFieldTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
                             .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 116, Short.MAX_VALUE))
                     .addGroup(jPanelCadastroClienteLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                        .addGap(42, 42, 42)
                         .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jButtonConsultar)))
-                .addGap(0, 116, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonConsultar1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonExcluir)
+                        .addGap(76, 76, 76))))
         );
         jPanelCadastroClienteLayout.setVerticalGroup(
             jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,12 +248,12 @@ public class TelaCadCliente extends javax.swing.JFrame {
                     .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEndereco, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(55, 55, 55)
-                .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonConsultar)
-                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonExcluir)
+                    .addComponent(jButtonConsultar1))
                 .addGap(53, 53, 53))
         );
 
@@ -274,30 +288,61 @@ public class TelaCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldDtNascimentoActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+          if(this.idCliente==0){
         try {
             controller.insere();
             limpaCampos();
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }                                             
+        else{
+            try {
+                controller.alterarCliente(idCliente);
+                limpaCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exceptiondao ex) {
+                  Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+              }
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+            idCliente=0;
             this.dispose();
             TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
             telaMenu.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        limpaCampos();
+         limpaCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
-    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-       TelaConsultaCliente telaconsultacliente = new TelaConsultaCliente();
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+      if(this.idCliente==0){
+        JOptionPane.showMessageDialog(null,"Erro, nenhum cliente foi selecionado para exclusão");
+        
+    }                                             
+        else{
+            try {
+                controller.deletarCliente(idCliente);
+                limpaCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exceptiondao ex) {
+                Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultar1ActionPerformed
+        TelaConsultaCliente telaconsultacliente = new TelaConsultaCliente();
         telaconsultacliente.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButtonConsultarActionPerformed
+    }//GEN-LAST:event_jButtonConsultar1ActionPerformed
     public void buscarCliente(Integer idCliente,String nome,String telefone,String dataNasc,String cnh,String cpf,String endereco){
         this.idCliente=idCliente;
         this.jTextFieldNome.setText(nome);
@@ -391,6 +436,7 @@ public class TelaCadCliente extends javax.swing.JFrame {
         this.jTextFieldNome = jTextFieldNome;
     }
      public void limpaCampos(){
+        idCliente=0;
         jTextFieldNome.setText("");
         jTextFieldEndereco.setText("");
         jFormattedTextFieldTelefone.setText("");
@@ -402,7 +448,8 @@ public class TelaCadCliente extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonConsultar1;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JFormattedTextField jFormattedTextFieldCnh;

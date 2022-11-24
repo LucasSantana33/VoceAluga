@@ -59,4 +59,43 @@ public class clienteController {
      public ArrayList<Cliente> listarClientes(String nome)throws Exceptiondao, SQLException{
         return new Cliente().listarClientes(nome);
     }
+     public void alterarCliente(int idCliente) throws SQLException, Exceptiondao {
+        String nome = view.getjTextFieldNome().getText();
+        String telefone = view.getjFormattedTextFieldTelefone().getText();
+        String dataNasc = view.getjFormattedTextFieldDtNascimento().getText();
+        String numCartMotorista = view.getjFormattedTextFieldCnh().getText();
+        String cpf = view.getjFormattedTextFieldCpf().getText();
+        int idFilial =id_filial;
+        String endereco = view.getjTextFieldEndereco().getText() ;
+        Cliente cliente = new Cliente(nome,telefone,dataNasc,numCartMotorista,cpf,endereco,idFilial);
+        // verificar se existe no Banco de dados
+        try{
+        Connection conexao = new conexao().getConnection();
+        ClienteDAO clienteDao = new ClienteDAO(conexao);
+        cliente.setIdCliente(idCliente);
+        clienteDao.AlterarCliente(cliente);
+        JOptionPane.showMessageDialog(null,"cliente Cadastrado com sucesso!!!");
+        //JOptionPane.showMessageDialog(null,id_filial);
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao cadastrar veiculo!!!");
+            Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
+     public void deletarCliente(int idCliente) throws SQLException, Exceptiondao {
+        Cliente cliente = new Cliente();
+        // verificar se existe no Banco de dados
+        try{
+        Connection conexao = new conexao().getConnection();
+        ClienteDAO clienteDao = new ClienteDAO(conexao);
+        cliente.setIdCliente(idCliente);
+        clienteDao.DeletarCliente(cliente);
+        JOptionPane.showMessageDialog(null,"Cliente deletado com sucesso!!!");
+        //JOptionPane.showMessageDialog(null,id_filial);
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao deletar cliente!!!");
+            Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
     }

@@ -122,8 +122,14 @@ public class Cliente {
         return new ClienteDAO(conexao).listarClientes(nome);
     
     }
-
-    
+     public  void alterarCliente(Cliente cliente)throws Exceptiondao, SQLException{
+               Connection conexao = new conexao().getConnection();
+               new ClienteDAO(conexao).AlterarCliente(cliente);
+           }
+    public  void deletarCliente(Cliente cliente)throws Exceptiondao, SQLException{
+               Connection conexao = new conexao().getConnection();
+               new ClienteDAO(conexao).DeletarCliente(cliente);
+           } 
     
     
 }
