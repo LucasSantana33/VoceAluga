@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import voceAluga.dao.Exceptiondao;
+import voceAluga.dao.ReservaDAO;
 import voceAluga.dao.VeiculoDAO;
 import voceAluga.dao.conexao;
 
@@ -135,4 +136,9 @@ public class Veiculo {
                Connection conexao = new conexao().getConnection();
                new VeiculoDAO(conexao).DeletarVeiculo(veiculo);
            } 
+    public  ArrayList<Veiculo> selecionarVeiculos(String nome)throws Exceptiondao, SQLException{
+        Connection conexao = new conexao().getConnection();
+        return new ReservaDAO(conexao).selecionarVeiculos(nome);
+    
+    }
 }

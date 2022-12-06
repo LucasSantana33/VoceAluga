@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import voceAluga.dao.ClienteDAO;
 import voceAluga.dao.Exceptiondao;
+import voceAluga.dao.ReservaDAO;
 import voceAluga.dao.VeiculoDAO;
 import voceAluga.dao.conexao;
 
@@ -130,6 +131,11 @@ public class Cliente {
                Connection conexao = new conexao().getConnection();
                new ClienteDAO(conexao).DeletarCliente(cliente);
            } 
+    public  ArrayList<Cliente> selecionarClientes(String nome)throws Exceptiondao, SQLException{
+        Connection conexao = new conexao().getConnection();
+        return new ReservaDAO(conexao).listarClientes(nome);
+    
+    }
     
     
 }

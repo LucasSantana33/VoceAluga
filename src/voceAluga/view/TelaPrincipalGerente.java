@@ -48,6 +48,11 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         jMenuItemAlugar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuItemAlugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuItemAlugar.setText("Alugar");
+        jMenuItemAlugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAlugarActionPerformed(evt);
+            }
+        });
         jMenuLocacao.add(jMenuItemAlugar);
 
         jMenuItemConsultar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -132,6 +137,12 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         telalogin.setVisible(true);
     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuSairMouseClicked
+
+    private void jMenuItemAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugarActionPerformed
+        this.dispose();
+        TelaLocacao telalocacao = new TelaLocacao();
+        telalocacao.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAlugarActionPerformed
 
     /**
      * @param args the command line arguments

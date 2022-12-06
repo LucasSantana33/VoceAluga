@@ -11,7 +11,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -90,8 +90,8 @@
                       <Component id="jLabelCpf" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelNome" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -103,17 +103,20 @@
                               <Component id="jFormattedTextFieldCpf" min="-2" pref="162" max="-2" attributes="0"/>
                               <Component id="jTextFieldNome" min="-2" pref="480" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="0" pref="116" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="jButtonLimpar" min="-2" pref="88" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="jButtonCancelar" min="-2" pref="99" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                          <Component id="jButtonConsultar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jButtonConsultar1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButtonExcluir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="116" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -151,13 +154,12 @@
                       <Component id="jLabelEndereco" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButtonLimpar" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButtonSalvar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="jButtonConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonCancelar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonSalvar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="jButtonCancelar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="jButtonLimpar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonConsultar1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               </Group>
@@ -335,7 +337,18 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonConsultar">
+        <Component class="javax.swing.JButton" name="jButtonExcluir">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Calibri" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Excluir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonConsultar1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="18" style="1"/>
@@ -343,7 +356,7 @@
             <Property name="text" type="java.lang.String" value="Consultar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConsultarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConsultar1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

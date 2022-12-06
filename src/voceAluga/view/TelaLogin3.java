@@ -94,7 +94,7 @@ public class TelaLogin3 extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/car-967387_1280.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 0, 860, 580));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 0, 830, 600));
 
         pack();
         setLocationRelativeTo(null);
