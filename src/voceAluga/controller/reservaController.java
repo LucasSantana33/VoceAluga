@@ -34,6 +34,27 @@ public class reservaController {
     public reservaController(){
     
     }
+    public void alterarReserva(int idReserva) throws SQLException, Exceptiondao {
+        String filialRetorno = view.getjTextFieldFilialRetorno().getText();
+        String dataEntrega = view.getjFormattedTextFieldDtEntrega().getText();
+        String dataRetorno = view.getjFormattedTextFieldDtRetorno().getText();
+        int idFilial =id_filial;
+        double valorReserva = Double.parseDouble(view.getjTextFieldValorReserva().getText()) ;
+        Reserva reserva = new Reserva(dataEntrega,valorReserva,dataRetorno,filialRetorno,id_filial);
+        // verificar se existe no Banco de dados
+        try{
+        Connection conexao = (Connection) new conexao().getConnection();
+        ReservaDAO reservaDao = new ReservaDAO(conexao);
+        reserva.setIdReserva(idReserva);
+        reservaDao.AlterarReserva(reserva);
+        JOptionPane.showMessageDialog(null,"Locação alterada com sucesso!!!");
+        //JOptionPane.showMessageDialog(null,id_filial);
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao alterar locação!!!");
+            java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
+        }
     public void alteraEstado(int idVeiculo)throws SQLException{
     try{
             java.sql.Connection conexao = new conexao().getConnection();
@@ -41,6 +62,30 @@ public class reservaController {
         Reserva reservaAltera = new Reserva();
         reservaAltera.setIdVeiculo(idVeiculo);
         reservaDao.alteraEstado(reservaAltera);
+        }catch(SQLException ex) {
+            java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
+        }
+    public void alteraEstado2(int idVeiculo)throws SQLException{
+    try{
+            java.sql.Connection conexao = new conexao().getConnection();
+        ReservaDAO reservaDao = new ReservaDAO(conexao);
+        Reserva reservaAltera = new Reserva();
+        reservaAltera.setIdVeiculo(idVeiculo);
+        reservaDao.alteraEstado2(reservaAltera);
+        }catch(SQLException ex) {
+            java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
+        }
+    public void alteraEstadoReserva(int idVeiculo)throws SQLException{
+    try{
+            java.sql.Connection conexao = new conexao().getConnection();
+        ReservaDAO reservaDao = new ReservaDAO(conexao);
+        Reserva reservaAltera = new Reserva();
+        reservaAltera.setIdVeiculo(idVeiculo);
+        reservaDao.alteraEstadoReserva(reservaAltera);
         }catch(SQLException ex) {
             java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -76,7 +121,13 @@ public class reservaController {
      public ArrayList<Veiculo> selecionarVeiculos(String nome)throws Exceptiondao, SQLException{
         return new Veiculo().selecionarVeiculos(nome);
     }
+     public ArrayList<Veiculo> selecionarVeiculosReserva(Integer idVeiculo)throws Exceptiondao, SQLException{
+        return new Veiculo().selecionarVeiculosReserva(idVeiculo);
+    }
      public ArrayList<Cliente> selecionarClientes(String nome)throws Exceptiondao, SQLException{
         return new Cliente().selecionarClientes(nome);
+    }
+      public ArrayList<Cliente> selecionarClientesReserva(Integer idCliente)throws Exceptiondao, SQLException{
+        return new Cliente().selecionarClientesReserva(idCliente);
     }
 }

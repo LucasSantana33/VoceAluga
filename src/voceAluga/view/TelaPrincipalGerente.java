@@ -117,31 +117,31 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
-        this.dispose();
         TelaCadCliente cadastroCliente = new TelaCadCliente();
         cadastroCliente.setVisible(true);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     private void jMenuItemVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVeiculoActionPerformed
-        this.dispose();
         TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
         cadastroVeiculo.setVisible(true);
+        this.dispose();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemVeiculoActionPerformed
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
-        this.dispose();
         TelaLogin3 telalogin = new TelaLogin3();
         telalogin.setVisible(true);
+        this.dispose();
     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuSairMouseClicked
 
     private void jMenuItemAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugarActionPerformed
-        this.dispose();
         TelaLocacao telalocacao = new TelaLocacao();
         telalocacao.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItemAlugarActionPerformed
 
     /**

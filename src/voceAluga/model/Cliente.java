@@ -136,6 +136,8 @@ public class Cliente {
         return new ReservaDAO(conexao).listarClientes(nome);
     
     }
-    
-    
+     public  ArrayList<Cliente> selecionarClientesReserva(Integer idCliente)throws Exceptiondao, SQLException{
+        Connection conexao = new conexao().getConnection();
+        return new ReservaDAO(conexao).listarClientesReserva(idCliente);   
+}
 }

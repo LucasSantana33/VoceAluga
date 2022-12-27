@@ -141,4 +141,9 @@ public class Veiculo {
         return new ReservaDAO(conexao).selecionarVeiculos(nome);
     
     }
+    public  ArrayList<Veiculo> selecionarVeiculosReserva(Integer idVeiculo)throws Exceptiondao, SQLException{
+        Connection conexao = new conexao().getConnection();
+        return new ReservaDAO(conexao).selecionarVeiculosReserva(idVeiculo);
+    
+    }
 }

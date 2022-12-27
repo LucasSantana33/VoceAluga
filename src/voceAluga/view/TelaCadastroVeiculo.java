@@ -71,7 +71,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         jTextFieldValorDiaria = new javax.swing.JTextField();
         jButtonExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Veiculo");
         setResizable(false);
 
@@ -296,9 +296,9 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     }
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         idVeiculo=0;
-        this.dispose();
        TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
-        telaMenu.setVisible(true);// TODO add your handling code here:
+        telaMenu.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed

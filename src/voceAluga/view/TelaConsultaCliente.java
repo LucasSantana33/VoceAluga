@@ -49,7 +49,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         jTableConsultaCliente = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Você Aluga");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {

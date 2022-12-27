@@ -41,11 +41,11 @@ public class loginController {
         // se existir direciona para menu
         id_filial = filialDao.pegaid(usuarioAutenticar);
         if (existe){
-         view.dispose();
          TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
         telaMenu.setVisible(true);
+        view.dispose();
         }else{
-            JOptionPane.showMessageDialog(view,"Usuario ou senha invalidos");
+            JOptionPane.showMessageDialog(view,"Usuario ou senha invalidos","ERRO!!!!",2);
         
         }
     }

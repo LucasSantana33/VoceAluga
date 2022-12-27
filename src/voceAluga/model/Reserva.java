@@ -21,14 +21,15 @@ public class Reserva {
     
     private Integer idReserva;
     private String dataEntrega;
-    private Float valorReserva;
+    private double valorReserva;
     private String dataRetorno;
     private String filialRetorno;
     private int idVeiculo;
     private int idFilial;
     private int idCliente;
+    private String estReserva;
 
-    public Reserva(String dataEntrega, Float valorReserva, String dataRetorno, String filialRetorno, int idFilial) {
+    public Reserva(String dataEntrega, double valorReserva, String dataRetorno, String filialRetorno, int idFilial) {
         this.dataEntrega = dataEntrega;
         this.valorReserva = valorReserva;
         this.dataRetorno = dataRetorno;
@@ -38,6 +39,14 @@ public class Reserva {
 
     public Reserva() {
         
+    }
+
+    public String getEstReserva() {
+        return estReserva;
+    }
+
+    public void setEstReserva(String estReserva) {
+        this.estReserva = estReserva;
     }
     
     public Integer getIdReserva() {
@@ -56,11 +65,11 @@ public class Reserva {
         this.dataEntrega = dataEntrega;
     }
 
-    public Float getValorReserva() {
+    public double getValorReserva() {
         return valorReserva;
     }
 
-    public void setValorReserva(Float valorReserva) {
+    public void setValorReserva(double valorReserva) {
         this.valorReserva = valorReserva;
     }
 

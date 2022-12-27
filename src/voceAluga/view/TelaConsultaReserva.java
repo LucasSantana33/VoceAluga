@@ -51,7 +51,7 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
         jTableConsultaReserva = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Você Aluga");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -81,14 +81,14 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id_Reserva", "data_entrega", "Valor_Reserva", "data_Retorno", "filial_Retorno", "id_Veiculo", "Id Filial", "id_Cliente"
+                "id_Reserva", "data_entrega", "Valor_Reserva", "data_Retorno", "filial_Retorno", "id_Veiculo", "Id Filial", "id_Cliente", "est_Reserva"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -182,7 +182,8 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
                                                reserva.getFilialRetorno(),
                                                reserva.getIdVeiculo(),
                                                reserva.getIdFilial(),
-                                               reserva.getIdCliente()});
+                                               reserva.getIdCliente(),
+                                               reserva.getEstReserva()});
             });    
         } catch (SQLException ex) {
             Logger.getLogger(TelaConsultaReserva.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,16 +199,16 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
 
     private void jTableConsultaReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaReservaMouseClicked
      if(evt.getClickCount()==2){
-            Integer idCliente = (Integer)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),0);
-            String nome =(String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),1);
-            String telefone= (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),2);
-            String dataNasc = (String)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),3);
-            String cnh = (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),4);
-            String cpf= (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),5);
-            String endereco= (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),6);
-            TelaCadCliente cadastroCliente= new TelaCadCliente();
-            cadastroCliente.buscarCliente(idCliente, nome, telefone, dataNasc, cnh, cpf, endereco);
-            cadastroCliente.setVisible(true);
+            Integer idReserva = (Integer)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),0);
+            String dataEntrega =(String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),1);
+            double valorReserva= (Double) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),2);
+            String dataRetorno = (String)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),3);
+            String filialRetorno = (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),4);
+            int idVeiculo = (Integer) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),5);
+            int idCliente = (Integer) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),7);
+            TelaLocacao locacao= new TelaLocacao();
+            locacao.buscarReserva(idReserva, dataEntrega, valorReserva, dataRetorno, filialRetorno,idVeiculo,idCliente);
+            locacao.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jTableConsultaReservaMouseClicked

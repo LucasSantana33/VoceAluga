@@ -63,7 +63,7 @@ public class TelaCadCliente extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
         jButtonConsultar1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Você aluga");
         setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
@@ -312,9 +312,9 @@ public class TelaCadCliente extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
             idCliente=0;
-            this.dispose();
             TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
-            telaMenu.setVisible(true);// TODO add your handling code here:
+            telaMenu.setVisible(true);
+            this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed

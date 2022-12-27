@@ -26,6 +26,7 @@ import voceAluga.model.Veiculo;
 public class TelaLocacao extends javax.swing.JFrame {
     private static  int idVeiculo=0;
     private static  int idCliente=0;
+    private static int idReserva=0;
     private final reservaController controller;
     /**
      * Creates new form TelaLocacao
@@ -70,14 +71,12 @@ public class TelaLocacao extends javax.swing.JFrame {
         jTableConsultaVeiculo = new javax.swing.JTable();
         jButtonConsultarVeiculo = new javax.swing.JButton();
         jButtonConsultarClientes = new javax.swing.JButton();
-        jButtonConsultarCliente = new javax.swing.JButton();
         jLabelCadReserva = new javax.swing.JLabel();
 
         jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 580));
-        setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
 
         jPanelCadastroReserva.setBackground(new java.awt.Color(102, 102, 102));
@@ -97,12 +96,8 @@ public class TelaLocacao extends javax.swing.JFrame {
         jLabelEndereco.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEndereco.setText("valor Reserva:");
 
-        try {
-            jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDtEntrega.setText("##/##/####");
+        jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        jFormattedTextFieldDtEntrega.setText(""); // NOI18N
         jFormattedTextFieldDtEntrega.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jFormattedTextFieldDtEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +136,7 @@ public class TelaLocacao extends javax.swing.JFrame {
         });
 
         jButtonExcluir.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setText("Finalizar");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
@@ -376,12 +371,6 @@ public class TelaLocacao extends javax.swing.JFrame {
                 .addGap(63, 63, 63))
         );
 
-        jButtonConsultarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarClienteConsultarCliente(evt);
-            }
-        });
-
         jLabelCadReserva.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabelCadReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/car.png"))); // NOI18N
         jLabelCadReserva.setText("Cadastro de reserva");
@@ -399,11 +388,6 @@ public class TelaLocacao extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanelCadastroReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(588, 588, 588)
-                    .addComponent(jButtonConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(190, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,11 +397,6 @@ public class TelaLocacao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelCadastroReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(387, 387, 387)
-                    .addComponent(jButtonConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(188, Short.MAX_VALUE)))
         );
 
         pack();
@@ -429,8 +408,12 @@ public class TelaLocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldDtEntregaActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+    if(jTextFieldFilialRetorno.getText().length() ==0){
+        JOptionPane.showMessageDialog(null,"Digite a filial de retorno do veiculo!!","ERRO!!!!",2);
+    }else{
+    if(idReserva ==0){    
         try {
-            //JOptionPane.showMessageDialog(null,idVeiculo);
+            //JOptionPane.showMessageDialog(null,idVeiculo);    
             if(idVeiculo > 0 & idCliente>0){
                 controller.insere(idVeiculo, idCliente);
                 controller.alteraEstado(idVeiculo);
@@ -440,23 +423,46 @@ public class TelaLocacao extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }else{try {
+        controller.alterarReserva(idReserva);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exceptiondao ex) {
+            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
-
+    }
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         limpaCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+            idReserva=0;
             idVeiculo=0;    
             idCliente=0;
-            this.dispose();
             TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
             telaMenu.setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-
+        try {
+            //JOptionPane.showMessageDialog(null,idVeiculo);
+            if(idReserva !=0){
+                this.idVeiculo=idVeiculo;
+                controller.alteraEstado2(idVeiculo);
+                controller.alteraEstadoReserva(idVeiculo);
+                
+                JOptionPane.showMessageDialog(null,idVeiculo);
+                limpaCampos();
+            }else{JOptionPane.showMessageDialog(null,"Por favor selecione uma reserva para dar baixa");}
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultar1ActionPerformed
@@ -476,7 +482,46 @@ public class TelaLocacao extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null,idCliente);
         }
     }//GEN-LAST:event_jTableSelecionaClienteMouseClicked
-
+ public void buscarReserva(Integer idReserva,String dataEntrega,double valorReserva,String dataRetorno,String filialRetorno,Integer idVeiculo,Integer idCliente){
+        this.idReserva=idReserva;
+        this.jTextFieldFilialRetorno.setText(filialRetorno);
+        this.jFormattedTextFieldDtEntrega.setText(dataEntrega);
+        this.jFormattedTextFieldDtRetorno.setText(dataRetorno);
+        this.jTextFieldValorReserva.setText(Double.toString(valorReserva));
+        this.idVeiculo=idVeiculo;
+        this.idCliente=idCliente;
+        DefaultTableModel tableModel = (DefaultTableModel) jTableSelecionaCliente.getModel();
+        tableModel.setRowCount(0);
+        //reservaController reservaController = new reservaController();
+        try {
+            ArrayList<Cliente> clientes = controller.selecionarClientesReserva(idCliente);
+            clientes.forEach((Cliente cliente)->{
+                tableModel.addRow(new Object[]{cliente.getIdCliente(),
+                    cliente.getNome(),
+                    cliente.getCpf()});
+        });
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exceptiondao ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultTableModel tableModel2 = (DefaultTableModel) jTableConsultaVeiculo.getModel();
+        tableModel2.setRowCount(0);
+        try {
+            ArrayList<Veiculo> veiculos = controller.selecionarVeiculosReserva(idVeiculo);
+            veiculos.forEach((Veiculo veiculo)->{
+                tableModel2.addRow(new Object[]{veiculo.getIdVeiculo(),
+                    veiculo.getModelo(),
+                    veiculo.getPlaca(),
+                    veiculo.getValorDiaria()});
+        });
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exceptiondao ex) {
+            Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //JOptionPane.showMessageDialog(null,idVeiculo);
+    }
     private void jTableConsultaVeiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaVeiculoMouseClicked
         if(evt.getClickCount()==1){
             Integer idVeiculo = (Integer)jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),0);
@@ -486,6 +531,7 @@ public class TelaLocacao extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTableConsultaVeiculoMouseClicked
     public void limpaCampos(){
+        idReserva=0;
         idVeiculo=0;
         idCliente=0;
         DefaultTableModel tableModel = (DefaultTableModel) jTableSelecionaCliente.getModel();
@@ -501,6 +547,7 @@ public class TelaLocacao extends javax.swing.JFrame {
     
     }
     private void jButtonConsultarVeiculoConsultarVeiculo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarVeiculoConsultarVeiculo
+     if(idReserva==0){   
         String nome = jTextFieldTituloVeiculo.getText();
         DefaultTableModel tableModel = (DefaultTableModel) jTableConsultaVeiculo.getModel();
         tableModel.setRowCount(0);
@@ -517,13 +564,11 @@ public class TelaLocacao extends javax.swing.JFrame {
         } catch (Exceptiondao ex) {
             Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
+     }
     }//GEN-LAST:event_jButtonConsultarVeiculoConsultarVeiculo
 
-    private void jButtonConsultarClienteConsultarCliente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarClienteConsultarCliente
- 
-    }//GEN-LAST:event_jButtonConsultarClienteConsultarCliente
-
     private void jButtonConsultarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarClientesActionPerformed
+     if(idReserva==0){   
         String nome = jTextFieldNomeCliente.getText();
         DefaultTableModel tableModel = (DefaultTableModel) jTableSelecionaCliente.getModel();
         tableModel.setRowCount(0);
@@ -541,7 +586,7 @@ public class TelaLocacao extends javax.swing.JFrame {
             Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonConsultarClientesActionPerformed
-
+  }
     /**
      * @param args the command line arguments
      */
@@ -628,7 +673,6 @@ public class TelaLocacao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConsultar1;
-    private javax.swing.JButton jButtonConsultarCliente;
     private javax.swing.JButton jButtonConsultarClientes;
     private javax.swing.JButton jButtonConsultarVeiculo;
     private javax.swing.JButton jButtonExcluir;
