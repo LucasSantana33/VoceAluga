@@ -1,0 +1,55 @@
+DROP DATABASE VcAluga;
+CREATE DATABASE IF NOT EXISTS VcAluga;
+USE VcAluga;
+
+CREATE TABLE Filial (
+	idFilial int auto_increment not null primary key,
+	cnpj varchar(20),
+	nome varchar(30),
+	endereco varchar(200),
+	login varchar(30),
+	senha varchar(30)
+);
+
+CREATE TABLE Cliente (
+	idCliente int auto_increment not null primary key, 
+	nome varchar(100),
+	telefone varchar(20),
+	dataNasc date,
+	numCartMotorista varchar(20),
+	cpf varchar(20),
+    endereco varchar(200),
+	idFilial int,
+    FOREIGN KEY (idFilial) REFERENCES Filial (idFilial)
+);
+
+CREATE TABLE Veiculo (
+	idVeiculo int auto_increment not null primary key,
+	modelo varchar(30),
+	cor varchar(30),
+	qtdLugares int,
+	fabricante varchar(30),
+	placa varchar(10),
+	estadoVeiculo varchar(50),
+    valorDiario float,
+	idFilial int,
+	FOREIGN KEY(idFilial) REFERENCES Filial (idFilial)
+);
+
+CREATE TABLE Reserva (
+	idReserva int auto_increment not null primary key,
+	dataEntrega date,
+	dataRetorno date,
+	valorReserva float,
+	filialRetirada int,
+	filialRetorno int,
+    estadoReserva varchar(40),
+	idVeiculo int,
+	idFilial int,
+	idCliente int,
+    FOREIGN KEY (filialRetirada) REFERENCES Filial (idFilial),
+    FOREIGN KEY (filialRetorno) REFERENCES Filial (idFilial),
+	FOREIGN KEY (idVeiculo) REFERENCES Veiculo (idVeiculo),
+	FOREIGN KEY (idFilial) REFERENCES Filial (idFilial),
+	FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)
+);
