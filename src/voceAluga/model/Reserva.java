@@ -23,7 +23,6 @@ public class Reserva {
     private Date dataEntrega;
     private Date dataRetorno;
     private double valorReserva;
-    private Filial filialRetirada;
     private Filial filialRetorno;
     private String estadoReserva;
     private Veiculo veiculo;
@@ -34,9 +33,6 @@ public class Reserva {
         this.dataEntrega = dataEntrega;
         this.valorReserva = valorReserva;
         this.dataRetorno = dataRetorno;
-        Filial filialRetirada = new Filial();
-        filialRetirada.setIdFilial(idFilial);
-        this.filialRetirada = filialRetirada;
         Filial filialRetorno = new Filial();
         filialRetorno.setNome(nomeFilialRetorno);
         this.filialRetorno = filialRetorno;
@@ -80,15 +76,6 @@ public class Reserva {
     public void setValorReserva(double valorReserva) {
         this.valorReserva = valorReserva;
     }
-
-    public Filial getFilialRetirada() {
-        return filialRetirada;
-    }
-
-    public void setFilialRetirada(Filial filialRetirada) {
-        this.filialRetirada = filialRetirada;
-    }
-
     public Filial getFilialRetorno() {
         return filialRetorno;
     }

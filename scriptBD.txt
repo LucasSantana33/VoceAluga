@@ -41,7 +41,6 @@ CREATE TABLE Reserva (
 	dataEntrega date,
 	dataRetorno date,
 	valorReserva float,
-	filialRetirada int,
 	filialRetorno varchar(30),
     estadoReserva varchar(40),
 	idVeiculo int,

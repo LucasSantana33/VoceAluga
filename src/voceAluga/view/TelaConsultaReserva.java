@@ -7,6 +7,7 @@ package voceAluga.view;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -179,7 +180,7 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
                                                reserva.getDataEntrega(),
                                                reserva.getValorReserva(), 
                                                reserva.getDataRetorno(),
-                                               reserva.getFilialRetorno(),
+                                               reserva.getFilialRetorno().getNome(),
                                                reserva.getVeiculo().getIdVeiculo(),
                                                reserva.getFilial().getIdFilial(),
                                                reserva.getCliente().getIdCliente(),
@@ -200,9 +201,9 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
     private void jTableConsultaReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaReservaMouseClicked
      if(evt.getClickCount()==2){
             Integer idReserva = (Integer)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),0);
-            String dataEntrega =(String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),1);
+            Date dataEntrega =(Date) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),1);
             double valorReserva= (Double) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),2);
-            String dataRetorno = (String)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),3);
+            Date dataRetorno = (Date)jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),3);
             String filialRetorno = (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),4);
             int idVeiculo = (Integer) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),5);
             int idCliente = (Integer) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),7);

@@ -58,6 +58,16 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         jMenuItemConsultar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jMenuItemConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/right-arrow.png"))); // NOI18N
         jMenuItemConsultar.setText("Consultar");
+        jMenuItemConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemConsultarMouseClicked(evt);
+            }
+        });
+        jMenuItemConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultarActionPerformed(evt);
+            }
+        });
         jMenuLocacao.add(jMenuItemConsultar);
 
         jMenuBar1.add(jMenuLocacao);
@@ -143,6 +153,16 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         telalocacao.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItemAlugarActionPerformed
+
+    private void jMenuItemConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemConsultarMouseClicked
+       
+    }//GEN-LAST:event_jMenuItemConsultarMouseClicked
+
+    private void jMenuItemConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultarActionPerformed
+        TelaConsultaReserva telacon = new TelaConsultaReserva();
+        telacon.setVisible(true);
+        this.dispose();  
+    }//GEN-LAST:event_jMenuItemConsultarActionPerformed
 
     /**
      * @param args the command line arguments

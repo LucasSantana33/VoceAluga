@@ -44,7 +44,7 @@ public class VeiculoDAO{
        statement.setString(4, veiculo.getFabricante());
        statement.setString(5, veiculo.getPlaca());
        statement.setDouble(6,veiculo.getValorDiaria());
-       statement.setInt(7,veiculo.getIdFilial());
+       statement.setInt(7,veiculo.getFilial().getIdFilial());
        
        //statement.setString(7,"Select idFilial from Filial where login = '"+usuario.getLogin()+"'");
        statement.execute();
@@ -65,6 +65,7 @@ public class VeiculoDAO{
             veiculos = new ArrayList<Veiculo>();
             while(Rs.next()){
                 Veiculo veiculo = new Veiculo();
+                Filial filial = new Filial();
                 veiculo.setIdVeiculo(Rs.getInt("idVeiculo"));
                 veiculo.setModelo(Rs.getString("modelo"));
                 veiculo.setCor(Rs.getString("cor"));
@@ -73,7 +74,8 @@ public class VeiculoDAO{
                 veiculo.setPlaca(Rs.getString("placa"));
                 veiculo.setEstadoVeiculo(Rs.getString("estadoVeiculo"));
                 veiculo.setValorDiaria(Rs.getDouble("valorDiaria"));
-                veiculo.setIdFilial(Rs.getInt("idFilial"));
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                veiculo.setFilial(filial);
                 veiculos.add(veiculo);
                 
                 

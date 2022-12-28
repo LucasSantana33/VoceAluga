@@ -70,7 +70,8 @@ public class reservaController {
         ReservaDAO reservaDao = new ReservaDAO(conexao);
         Reserva reservaAltera = new Reserva();
         Veiculo veiculo = new Veiculo();
-        reservaAltera.getVeiculo().setIdVeiculo(idVeiculo);
+        veiculo.setIdVeiculo(idVeiculo);
+        reservaAltera.setVeiculo(veiculo);
         reservaDao.alteraEstado(reservaAltera);
         }catch(SQLException ex) {
             java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

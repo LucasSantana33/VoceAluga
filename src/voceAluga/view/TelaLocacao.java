@@ -7,7 +7,9 @@ package voceAluga.view;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -98,7 +100,6 @@ public class TelaLocacao extends javax.swing.JFrame {
         jLabelEndereco.setText("valor Reserva:");
 
         jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        jFormattedTextFieldDtEntrega.setText(""); // NOI18N
         jFormattedTextFieldDtEntrega.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jFormattedTextFieldDtEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +209,7 @@ public class TelaLocacao extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableSelecionaCliente);
 
         jLabelConsultaVeiculo.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabelConsultaVeiculo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelConsultaVeiculo.setText("Selecione o Veículo:");
 
         jTextFieldTituloVeiculo.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -409,9 +411,7 @@ public class TelaLocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldDtEntregaActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-    if(jTextFieldFilialRetorno.getText().length() ==0){
-        JOptionPane.showMessageDialog(null,"Digite a filial de retorno do veiculo!!","ERRO!!!!",2);
-    }else{
+
     if(idReserva == 0){    
         try {
             //JOptionPane.showMessageDialog(null,idVeiculo);    
@@ -438,7 +438,7 @@ public class TelaLocacao extends javax.swing.JFrame {
 }
         
     }//GEN-LAST:event_jButtonSalvarActionPerformed
-    }
+
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         limpaCampos();
         // TODO add your handling code here:
@@ -461,7 +461,7 @@ public class TelaLocacao extends javax.swing.JFrame {
                 controller.alteraEstado2(idVeiculo);
                 controller.alteraEstadoReserva(idVeiculo);
                 
-                JOptionPane.showMessageDialog(null,idVeiculo);
+                JOptionPane.showMessageDialog(null,"Reserva finalizada com sucesso");
                 limpaCampos();
             }else{JOptionPane.showMessageDialog(null,"Por favor selecione uma reserva para dar baixa");}
             
@@ -487,11 +487,13 @@ public class TelaLocacao extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null,idCliente);
         }
     }//GEN-LAST:event_jTableSelecionaClienteMouseClicked
- public void buscarReserva(Integer idReserva,String dataEntrega,double valorReserva,String dataRetorno,String filialRetorno,Integer idVeiculo,Integer idCliente){
+ public void buscarReserva(Integer idReserva,Date dataEntrega,double valorReserva,Date dataRetorno,String filialRetorno,Integer idVeiculo,Integer idCliente){
         this.idReserva=idReserva;
         this.jTextFieldFilialRetorno.setText(filialRetorno);
-        this.jFormattedTextFieldDtEntrega.setText(dataEntrega);
-        this.jFormattedTextFieldDtRetorno.setText(dataRetorno);
+        SimpleDateFormat mask = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat mask1 = new SimpleDateFormat("dd/MM/yyyy");
+        this.jFormattedTextFieldDtEntrega.setText(mask.format(dataEntrega));
+        this.jFormattedTextFieldDtRetorno.setText(mask.format(dataRetorno));
         this.jTextFieldValorReserva.setText(Double.toString(valorReserva));
         this.idVeiculo=idVeiculo;
         this.idCliente=idCliente;

@@ -27,8 +27,8 @@ public class ReservaDAO {
      this.connection = connection;
  }
  public void insert(Reserva reserva) throws SQLException {
-       String sql = "insert into reserva(dataEntrega,valorReserva,dataRetorno,filialRetorno,idVeiculo,idFilial,idCliente,estadoReserva,filialRetirada)"
-                + "values(?,?,?,?,?,?,?,'Ativa',?)";// falta arrumar a questão do idFilial. 
+       String sql = "insert into reserva(dataEntrega,valorReserva,dataRetorno,filialRetorno,idVeiculo,idFilial,idCliente,estadoReserva)"
+                + "values(?,?,?,?,?,?,?,'Ativa')";// falta arrumar a questão do idFilial. 
        
        PreparedStatement statement = connection.prepareStatement(sql);
        statement.setDate(1, new Date(reserva.getDataEntrega().getTime()));
@@ -38,7 +38,6 @@ public class ReservaDAO {
        statement.setInt(5, reserva.getVeiculo().getIdVeiculo());
        statement.setInt(6,reserva.getFilial().getIdFilial());
        statement.setInt(7,reserva.getCliente().getIdCliente());
-       statement.setInt(8, reserva.getFilialRetirada().getIdFilial());
        statement.execute();
        connection.close();
         
@@ -91,7 +90,7 @@ public class ReservaDAO {
     
     }
     public void alteraEstadoReserva(Reserva reserva)throws SQLException{
-    String sql ="Update reserva set estReserva='Inativa'"
+    String sql ="Update reserva set estadoReserva='Inativa'"
                + "where idveiculo =?";
     PreparedStatement statement = connection.prepareStatement(sql);
        statement.setInt(1,reserva.getVeiculo().getIdVeiculo());    
@@ -112,6 +111,7 @@ public class ReservaDAO {
             veiculos = new ArrayList<Veiculo>();
             while(Rs.next()){
                 Veiculo veiculo = new Veiculo();
+                Filial filial = new Filial();
                 veiculo.setIdVeiculo(Rs.getInt("idVeiculo"));
                 veiculo.setModelo(Rs.getString("modelo"));
                 veiculo.setCor(Rs.getString("cor"));
@@ -120,7 +120,8 @@ public class ReservaDAO {
                 veiculo.setPlaca(Rs.getString("placa"));
                 veiculo.setEstadoVeiculo(Rs.getString("estadoVeiculo"));
                 veiculo.setValorDiaria(Rs.getDouble("valorDiaria"));
-                veiculo.setIdFilial(Rs.getInt("idFilial"));
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                veiculo.setFilial(filial);
                 veiculos.add(veiculo);
                 
                 
@@ -157,6 +158,7 @@ public class ReservaDAO {
             veiculos = new ArrayList<Veiculo>();
             while(Rs.next()){
                 Veiculo veiculo = new Veiculo();
+                Filial filial = new Filial();
                 veiculo.setIdVeiculo(Rs.getInt("idVeiculo"));
                 veiculo.setModelo(Rs.getString("modelo"));
                 veiculo.setCor(Rs.getString("cor"));
@@ -165,7 +167,8 @@ public class ReservaDAO {
                 veiculo.setPlaca(Rs.getString("placa"));
                 veiculo.setEstadoVeiculo(Rs.getString("estadoVeiculo"));
                 veiculo.setValorDiaria(Rs.getDouble("valorDiaria"));
-                veiculo.setIdFilial(Rs.getInt("idFilial"));
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                veiculo.setFilial(filial);
                 veiculos.add(veiculo);
                 
                 
@@ -211,9 +214,7 @@ public class ReservaDAO {
                 reserva.setDataEntrega(Rs.getDate("dataEntrega"));
                 reserva.setDataRetorno(Rs.getDate("dataRetorno"));
                 reserva.setValorReserva(Rs.getFloat("valorReserva"));
-                filialRetirada.setIdFilial(Rs.getInt("FilialRetirada"));
-                reserva.setFilialRetirada(filialRetirada);
-                filialRetorno.setNome(Rs.getString("FilialRetorno"));
+                filialRetorno.setNome(Rs.getString("filialRetorno"));
                 reserva.setFilialRetorno(filialRetorno);
                 reserva.setEstadoReserva(Rs.getString("estadoReserva"));
                 veiculo.setIdVeiculo(Rs.getInt("idVeiculo"));

@@ -173,7 +173,7 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
                                                veiculo.getPlaca(),
                                                veiculo.getEstadoVeiculo(),
                                                veiculo.getValorDiaria(),
-                                               veiculo.getIdFilial()});
+                                               veiculo.getFilial().getIdFilial()});
             });    
         } catch (SQLException ex) {
             Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);

@@ -26,7 +26,7 @@ public class Veiculo {
     private String fabricante;
     private String placa;
      private String EstadoVeiculo;
-    private int idFilial;
+    private Filial filial;
     private double valorDiaria;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
     
@@ -39,18 +39,12 @@ public class Veiculo {
         this.qtdLugares = qtdLugares;
         this.fabricante = fabricante;
         this.placa = placa;
-        this.idFilial = idFilial;
+        Filial filial = new Filial();
+        filial.setIdFilial(idFilial);
+        this.filial = filial;
         this.valorDiaria = valorDiaria;
     }
 
-    public String getEstadoVeiculo() {
-        return EstadoVeiculo;
-    }
-
-    public void setEstadoVeiculo(String EstadoVeiculo) {
-        this.EstadoVeiculo = EstadoVeiculo;
-    }
-    
     public Integer getIdVeiculo() {
         return idVeiculo;
     }
@@ -99,12 +93,20 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public int getIdFilial() {
-        return idFilial;
+    public String getEstadoVeiculo() {
+        return EstadoVeiculo;
     }
 
-    public void setIdFilial(int idFilial) {
-        this.idFilial = idFilial;
+    public void setEstadoVeiculo(String EstadoVeiculo) {
+        this.EstadoVeiculo = EstadoVeiculo;
+    }
+
+    public Filial getFilial() {
+        return filial;
+    }
+
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
 
     public double getValorDiaria() {
@@ -122,6 +124,8 @@ public class Veiculo {
     public void setReservas(ArrayList<Reserva> reservas) {
         this.reservas = reservas;
     }
+
+   
     
     public  ArrayList<Veiculo> listarVeiculos(String nome)throws Exceptiondao, SQLException{
         Connection conexao = new conexao().getConnection();
