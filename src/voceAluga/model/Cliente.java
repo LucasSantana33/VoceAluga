@@ -24,27 +24,29 @@ public class Cliente {
     private Integer idCliente;
     private String nome;
     private String telefone;
-    private String dataNasc;
+    private Date dataNasc;
     private String numCartMotorista;
     private String cpf;
     private String endereco;
-    private int idFilial;
+    private Filial filial;
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
-    public Cliente(String nome, String telefone, String dataNasc, String numCartMotorista, String cpf, String endereco, int idFilial) {
+    public Cliente(String nome, String telefone, Date dataNasc, String numCartMotorista, String cpf, String endereco, int idFilial) {
         this.nome = nome;
         this.telefone = telefone;
         this.dataNasc = dataNasc;
         this.numCartMotorista = numCartMotorista;
         this.cpf = cpf;
         this.endereco = endereco;
-        this.idFilial = idFilial;
+        Filial filial = new Filial();
+        filial.setIdFilial(idFilial);
+        this.filial = filial;
     }
 
     public Cliente() {
         
     }
-    
+
     public Integer getIdCliente() {
         return idCliente;
     }
@@ -69,11 +71,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -101,12 +103,12 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public int getIdFilial() {
-        return idFilial;
+    public Filial getFilial() {
+        return filial;
     }
 
-    public void setIdFilial(int idFilial) {
-        this.idFilial = idFilial;
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
 
     public ArrayList<Reserva> getReservas() {
@@ -116,8 +118,7 @@ public class Cliente {
     public void setReservas(ArrayList<Reserva> reservas) {
         this.reservas = reservas;
     }
-
-    
+       
      public  ArrayList<Cliente> listarClientes(String nome)throws Exceptiondao, SQLException{
         Connection conexao = new conexao().getConnection();
         return new ClienteDAO(conexao).listarClientes(nome);

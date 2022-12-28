@@ -9,8 +9,10 @@ import com.mysql.jdbc.Connection;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import static voceAluga.controller.loginController.id_filial;
 import voceAluga.dao.ReservaDAO;
@@ -34,13 +36,20 @@ public class reservaController {
     public reservaController(){
     
     }
-    public void alterarReserva(int idReserva) throws SQLException, Exceptiondao {
+    public void alterarReserva(int idReserva) throws SQLException, Exceptiondao, ParseException {
         String filialRetorno = view.getjTextFieldFilialRetorno().getText();
         String dataEntrega = view.getjFormattedTextFieldDtEntrega().getText();
         String dataRetorno = view.getjFormattedTextFieldDtRetorno().getText();
         int idFilial =id_filial;
         double valorReserva = Double.parseDouble(view.getjTextFieldValorReserva().getText()) ;
-        Reserva reserva = new Reserva(dataEntrega,valorReserva,dataRetorno,filialRetorno,id_filial);
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data1 = formato.parse(dataEntrega);
+        Date data2 = formato.parse(dataRetorno);
+        
+        
+        
+        Reserva reserva = new Reserva(data1,valorReserva,data2,filialRetorno,id_filial);
         // verificar se existe no Banco de dados
         try{
         Connection conexao = (Connection) new conexao().getConnection();
@@ -60,7 +69,8 @@ public class reservaController {
             java.sql.Connection conexao = new conexao().getConnection();
         ReservaDAO reservaDao = new ReservaDAO(conexao);
         Reserva reservaAltera = new Reserva();
-        reservaAltera.setIdVeiculo(idVeiculo);
+        Veiculo veiculo = new Veiculo();
+        reservaAltera.getVeiculo().setIdVeiculo(idVeiculo);
         reservaDao.alteraEstado(reservaAltera);
         }catch(SQLException ex) {
             java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -72,7 +82,9 @@ public class reservaController {
             java.sql.Connection conexao = new conexao().getConnection();
         ReservaDAO reservaDao = new ReservaDAO(conexao);
         Reserva reservaAltera = new Reserva();
-        reservaAltera.setIdVeiculo(idVeiculo);
+        Veiculo veiculo = new Veiculo();
+        veiculo.setIdVeiculo(idVeiculo);
+        reservaAltera.setVeiculo(veiculo);
         reservaDao.alteraEstado2(reservaAltera);
         }catch(SQLException ex) {
             java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -84,7 +96,9 @@ public class reservaController {
             java.sql.Connection conexao = new conexao().getConnection();
         ReservaDAO reservaDao = new ReservaDAO(conexao);
         Reserva reservaAltera = new Reserva();
-        reservaAltera.setIdVeiculo(idVeiculo);
+        Veiculo veiculo = new Veiculo();
+        veiculo.setIdVeiculo(idVeiculo);
+        reservaAltera.setVeiculo(veiculo);
         reservaDao.alteraEstadoReserva(reservaAltera);
         }catch(SQLException ex) {
             java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -92,7 +106,7 @@ public class reservaController {
         
         }
     
-    public void insere(int idVeiculo,int idCliente) throws SQLException {
+    public void insere(int idVeiculo,int idCliente) throws SQLException, ParseException {
         // Buscar um Usuário da view
         
         String filialRetorno = view.getjTextFieldFilialRetorno().getText();
@@ -101,13 +115,21 @@ public class reservaController {
         Float valorReserva = Float.parseFloat(view.getjTextFieldValorReserva().getText());
         int idFilial = id_filial;
         
-        Reserva reservaInsert = new Reserva(dtEntrega,valorReserva,dtRetorno,filialRetorno,idFilial);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data1 = formato.parse(dtEntrega);
+        Date data2 = formato.parse(dtRetorno);
+        
+        Reserva reservaInsert = new Reserva(data1,valorReserva,data2,filialRetorno,idFilial);
         // verificar se existe no Banco de dados
         try{
             java.sql.Connection conexao = new conexao().getConnection();
         ReservaDAO reservaDao = new ReservaDAO(conexao);
-        reservaInsert.setIdVeiculo(idVeiculo);
-        reservaInsert.setIdCliente(idCliente);
+        Veiculo veiculo = new Veiculo();
+        veiculo.setIdVeiculo(idVeiculo);
+        reservaInsert.setVeiculo(veiculo);
+        Cliente cliente = new Cliente();
+        cliente.setIdCliente(idCliente);
+        reservaInsert.setCliente(cliente);
         reservaDao.insert(reservaInsert);
         JOptionPane.showMessageDialog(null,"Locação Salvo com sucesso!!!");
         }catch(SQLException ex) {

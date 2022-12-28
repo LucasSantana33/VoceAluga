@@ -23,7 +23,7 @@ public class conexao {
               e.printStackTrace();
           }
         try {
-           conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mvc?useSSL=false","root","coti");
+           conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vcaluga?useSSL=false","root","");
         } catch(SQLException e){
               e.printStackTrace();
         }

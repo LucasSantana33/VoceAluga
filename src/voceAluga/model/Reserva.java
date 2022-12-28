@@ -6,7 +6,7 @@
 package voceAluga.model;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import voceAluga.dao.Exceptiondao;
@@ -20,35 +20,35 @@ import voceAluga.dao.conexao;
 public class Reserva {
     
     private Integer idReserva;
-    private String dataEntrega;
+    private Date dataEntrega;
+    private Date dataRetorno;
     private double valorReserva;
-    private String dataRetorno;
-    private String filialRetorno;
-    private int idVeiculo;
-    private int idFilial;
-    private int idCliente;
-    private String estReserva;
+    private Filial filialRetirada;
+    private Filial filialRetorno;
+    private String estadoReserva;
+    private Veiculo veiculo;
+    private Filial filial;
+    private Cliente cliente;
 
-    public Reserva(String dataEntrega, double valorReserva, String dataRetorno, String filialRetorno, int idFilial) {
+    public Reserva(Date dataEntrega, double valorReserva, Date dataRetorno, String nomeFilialRetorno, int idFilial) {
         this.dataEntrega = dataEntrega;
         this.valorReserva = valorReserva;
         this.dataRetorno = dataRetorno;
+        Filial filialRetirada = new Filial();
+        filialRetirada.setIdFilial(idFilial);
+        this.filialRetirada = filialRetirada;
+        Filial filialRetorno = new Filial();
+        filialRetorno.setNome(nomeFilialRetorno);
         this.filialRetorno = filialRetorno;
-        this.idFilial = idFilial;
+        Filial filial = new Filial();
+        filial.setIdFilial(idFilial);
+        this.filial = filial;
     }
 
     public Reserva() {
         
     }
 
-    public String getEstReserva() {
-        return estReserva;
-    }
-
-    public void setEstReserva(String estReserva) {
-        this.estReserva = estReserva;
-    }
-    
     public Integer getIdReserva() {
         return idReserva;
     }
@@ -57,12 +57,20 @@ public class Reserva {
         this.idReserva = idReserva;
     }
 
-    public String getDataEntrega() {
+    public Date getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(String dataEntrega) {
+    public void setDataEntrega(Date dataEntrega) {
         this.dataEntrega = dataEntrega;
+    }
+
+    public Date getDataRetorno() {
+        return dataRetorno;
+    }
+
+    public void setDataRetorno(Date dataRetorno) {
+        this.dataRetorno = dataRetorno;
     }
 
     public double getValorReserva() {
@@ -73,45 +81,54 @@ public class Reserva {
         this.valorReserva = valorReserva;
     }
 
-    public String getDataRetorno() {
-        return dataRetorno;
+    public Filial getFilialRetirada() {
+        return filialRetirada;
     }
 
-    public void setDataRetorno(String dataRetorno) {
-        this.dataRetorno = dataRetorno;
+    public void setFilialRetirada(Filial filialRetirada) {
+        this.filialRetirada = filialRetirada;
     }
 
-    public String getFilialRetorno() {
+    public Filial getFilialRetorno() {
         return filialRetorno;
     }
 
-    public void setFilialRetorno(String filialRetorno) {
+    public void setFilialRetorno(Filial filialRetorno) {
         this.filialRetorno = filialRetorno;
     }
 
-    public int getIdVeiculo() {
-        return idVeiculo;
+    public String getEstadoReserva() {
+        return estadoReserva;
     }
 
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
+    public void setEstadoReserva(String estadoReserva) {
+        this.estadoReserva = estadoReserva;
     }
 
-    public int getIdFilial() {
-        return idFilial;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setIdFilial(int idFilial) {
-        this.idFilial = idFilial;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Filial getFilial() {
+        return filial;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+   
     public  ArrayList<Reserva> listarReservas(String nome)throws Exceptiondao, SQLException{
         Connection conexao = new conexao().getConnection();
         return new ReservaDAO(conexao).listarReservas(nome);

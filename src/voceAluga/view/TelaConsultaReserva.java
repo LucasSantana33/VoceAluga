@@ -180,10 +180,10 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
                                                reserva.getValorReserva(), 
                                                reserva.getDataRetorno(),
                                                reserva.getFilialRetorno(),
-                                               reserva.getIdVeiculo(),
-                                               reserva.getIdFilial(),
-                                               reserva.getIdCliente(),
-                                               reserva.getEstReserva()});
+                                               reserva.getVeiculo().getIdVeiculo(),
+                                               reserva.getFilial().getIdFilial(),
+                                               reserva.getCliente().getIdCliente(),
+                                               reserva.getEstadoReserva()});
             });    
         } catch (SQLException ex) {
             Logger.getLogger(TelaConsultaReserva.class.getName()).log(Level.SEVERE, null, ex);

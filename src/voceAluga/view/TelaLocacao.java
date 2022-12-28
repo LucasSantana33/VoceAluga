@@ -6,6 +6,7 @@
 package voceAluga.view;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -411,7 +412,7 @@ public class TelaLocacao extends javax.swing.JFrame {
     if(jTextFieldFilialRetorno.getText().length() ==0){
         JOptionPane.showMessageDialog(null,"Digite a filial de retorno do veiculo!!","ERRO!!!!",2);
     }else{
-    if(idReserva ==0){    
+    if(idReserva == 0){    
         try {
             //JOptionPane.showMessageDialog(null,idVeiculo);    
             if(idVeiculo > 0 & idCliente>0){
@@ -422,12 +423,16 @@ public class TelaLocacao extends javax.swing.JFrame {
             
         } catch (SQLException ex) {
             Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }else{try {
         controller.alterarReserva(idReserva);
         } catch (SQLException ex) {
             Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exceptiondao ex) {
+            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
         }
 }

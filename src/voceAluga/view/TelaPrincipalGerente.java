@@ -117,7 +117,7 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
-        TelaCadCliente cadastroCliente = new TelaCadCliente();
+        TelaCadastroCliente cadastroCliente = new TelaCadastroCliente();
         cadastroCliente.setVisible(true);
         this.dispose();
         // TODO add your handling code here:

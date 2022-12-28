@@ -31,7 +31,7 @@ CREATE TABLE Veiculo (
 	fabricante varchar(30),
 	placa varchar(10),
 	estadoVeiculo varchar(50),
-    valorDiario float,
+    valorDiaria float,
 	idFilial int,
 	FOREIGN KEY(idFilial) REFERENCES Filial (idFilial)
 );
@@ -42,13 +42,12 @@ CREATE TABLE Reserva (
 	dataRetorno date,
 	valorReserva float,
 	filialRetirada int,
-	filialRetorno int,
+	filialRetorno varchar(30),
     estadoReserva varchar(40),
 	idVeiculo int,
 	idFilial int,
 	idCliente int,
     FOREIGN KEY (filialRetirada) REFERENCES Filial (idFilial),
-    FOREIGN KEY (filialRetorno) REFERENCES Filial (idFilial),
 	FOREIGN KEY (idVeiculo) REFERENCES Veiculo (idVeiculo),
 	FOREIGN KEY (idFilial) REFERENCES Filial (idFilial),
 	FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)

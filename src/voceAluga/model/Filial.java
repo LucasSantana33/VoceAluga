@@ -23,6 +23,10 @@ public class Filial {
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
+    public Filial() {
+        
+    }
+    
     public Integer getIdFilial() {
         return idFilial;
     }

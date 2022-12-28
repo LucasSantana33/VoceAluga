@@ -7,6 +7,7 @@ package voceAluga.view;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,13 +25,13 @@ import voceAluga.model.Veiculo;
  */
 public class TelaConsultaCliente extends javax.swing.JFrame {
 
-    private TelaCadCliente telaCadCliente;
+    private TelaCadastroCliente telaCadCliente;
    
     public TelaConsultaCliente() {
         initComponents();
     }
 
-    public TelaConsultaCliente(TelaCadCliente telaCadCliente){
+    public TelaConsultaCliente(TelaCadastroCliente telaCadCliente){
         this.telaCadCliente = telaCadCliente;
         initComponents();
     }   
@@ -180,7 +181,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                                                cliente.getNumCartMotorista(),
                                                cliente.getCpf(),
                                                cliente.getEndereco(),
-                                               cliente.getIdFilial()});
+                                               cliente.getFilial().getIdFilial()});
             });    
         } catch (SQLException ex) {
             Logger.getLogger(TelaConsultaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,11 +200,11 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
             Integer idCliente = (Integer)jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),0);
             String nome =(String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),1);
             String telefone= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),2);
-            String dataNasc = (String)jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),3);
+            Date dataNasc = (Date) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),3);
             String cnh = (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),4);
             String cpf= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),5);
             String endereco= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),6);
-            TelaCadCliente cadastroCliente= new TelaCadCliente();
+            TelaCadastroCliente cadastroCliente= new TelaCadastroCliente();
             cadastroCliente.buscarCliente(idCliente, nome, telefone, dataNasc, cnh, cpf, endereco);
             cadastroCliente.setVisible(true);
             this.dispose();

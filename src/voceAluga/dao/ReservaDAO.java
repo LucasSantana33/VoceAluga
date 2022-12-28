@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import voceAluga.model.Cliente;
+import voceAluga.model.Filial;
 import voceAluga.model.Reserva;
 import voceAluga.model.Veiculo;
 
@@ -26,32 +27,33 @@ public class ReservaDAO {
      this.connection = connection;
  }
  public void insert(Reserva reserva) throws SQLException {
-       String sql = "insert into reserva(dataEntrega,valorReserva,dataRetorno,filialRetorno,idVeiculo,idFilial,idCliente,estReserva)"
-                + "values(?,?,?,?,?,?,?,'Ativa')";// falta arrumar a questão do idFilial. 
+       String sql = "insert into reserva(dataEntrega,valorReserva,dataRetorno,filialRetorno,idVeiculo,idFilial,idCliente,estadoReserva,filialRetirada)"
+                + "values(?,?,?,?,?,?,?,'Ativa',?)";// falta arrumar a questão do idFilial. 
        
        PreparedStatement statement = connection.prepareStatement(sql);
-       statement.setString(1,reserva.getDataEntrega());
+       statement.setDate(1, new Date(reserva.getDataEntrega().getTime()));
        statement.setDouble(2, reserva.getValorReserva());
-       statement.setString(3,reserva.getDataRetorno());
-       statement.setString(4, reserva.getFilialRetorno());
-       statement.setInt(5, reserva.getIdVeiculo());
-       statement.setInt(6,reserva.getIdFilial());
-       statement.setInt(7,reserva.getIdCliente());
+       statement.setDate(3, new Date(reserva.getDataRetorno().getTime()));
+       statement.setString(4, reserva.getFilialRetorno().getNome());
+       statement.setInt(5, reserva.getVeiculo().getIdVeiculo());
+       statement.setInt(6,reserva.getFilial().getIdFilial());
+       statement.setInt(7,reserva.getCliente().getIdCliente());
+       statement.setInt(8, reserva.getFilialRetirada().getIdFilial());
        statement.execute();
        connection.close();
         
     }
   public void AlterarReserva(Reserva reserva) throws SQLException, Exceptiondao {
-       String sql = "Update reserva set filialRetorno=?,dataEntrega=?,dataRetorno=?,valorReserva=?"
+       String sql = "Update reserva set filialRetorno=?, dataEntrega=?, dataRetorno=?, valorReserva=?"
                + "where idReserva =?";
        Connection connection = null;
         PreparedStatement statement = null;
        try{
         connection = new conexao().getConnection();
        statement = connection.prepareStatement(sql);
-       statement.setString(1, reserva.getFilialRetorno());
-       statement.setString(2, reserva.getDataEntrega());
-       statement.setString(3, reserva.getDataRetorno());
+       statement.setString(1, reserva.getFilialRetorno().getNome());
+       statement.setDate(2, new Date(reserva.getDataEntrega().getTime()));
+       statement.setDate(3, new Date(reserva.getDataRetorno().getTime()));
        statement.setDouble(4,reserva.getValorReserva());
         statement.setInt(5,reserva.getIdReserva());
        statement.execute();
@@ -74,7 +76,7 @@ public class ReservaDAO {
     String sql = "Update veiculo set estadoVeiculo='Reservado'"
                + "where idveiculo =?";
     PreparedStatement statement = connection.prepareStatement(sql);
-       statement.setInt(1,reserva.getIdVeiculo());
+       statement.setInt(1,reserva.getVeiculo().getIdVeiculo());
        statement.execute();
        connection.close();
     
@@ -83,7 +85,7 @@ public class ReservaDAO {
     String sql = "Update veiculo set estadoVeiculo='Disponivel'"
                + "where idveiculo =?";
     PreparedStatement statement = connection.prepareStatement(sql);
-       statement.setInt(1,reserva.getIdVeiculo());   
+       statement.setInt(1,reserva.getVeiculo().getIdVeiculo());   
       statement.execute();
        connection.close();
     
@@ -92,7 +94,7 @@ public class ReservaDAO {
     String sql ="Update reserva set estReserva='Inativa'"
                + "where idveiculo =?";
     PreparedStatement statement = connection.prepareStatement(sql);
-       statement.setInt(1,reserva.getIdVeiculo());    
+       statement.setInt(1,reserva.getVeiculo().getIdVeiculo());    
        statement.execute();
        connection.close();
     
@@ -200,15 +202,26 @@ public class ReservaDAO {
             reservas = new ArrayList<Reserva>();
             while(Rs.next()){
                 Reserva reserva = new Reserva();
+                Filial filialRetirada = new Filial();
+                Filial filialRetorno = new Filial();
+                Veiculo veiculo = new Veiculo();
+                Filial filial = new Filial();
+                Cliente cliente = new Cliente();
                 reserva.setIdReserva(Rs.getInt("idReserva"));
-                reserva.setDataEntrega(Rs.getString("dataEntrega"));
+                reserva.setDataEntrega(Rs.getDate("dataEntrega"));
+                reserva.setDataRetorno(Rs.getDate("dataRetorno"));
                 reserva.setValorReserva(Rs.getFloat("valorReserva"));
-                reserva.setDataRetorno(Rs.getString("dataRetorno"));
-                reserva.setFilialRetorno(Rs.getString("FilialRetorno"));
-                reserva.setIdVeiculo(Rs.getInt("idVeiculo"));
-                reserva.setIdFilial(Rs.getInt("idFilial"));
-                reserva.setIdCliente(Rs.getInt("idCliente"));
-                reserva.setEstReserva(Rs.getString("estReserva"));
+                filialRetirada.setIdFilial(Rs.getInt("FilialRetirada"));
+                reserva.setFilialRetirada(filialRetirada);
+                filialRetorno.setNome(Rs.getString("FilialRetorno"));
+                reserva.setFilialRetorno(filialRetorno);
+                reserva.setEstadoReserva(Rs.getString("estadoReserva"));
+                veiculo.setIdVeiculo(Rs.getInt("idVeiculo"));
+                reserva.setVeiculo(veiculo);
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                reserva.setFilial(filial);
+                cliente.setIdCliente(Rs.getInt("idCliente"));
+                reserva.setCliente(cliente);
                 reservas.add(reserva);
                 
                 
@@ -244,14 +257,16 @@ public class ReservaDAO {
             clientes = new ArrayList<Cliente>();
             while(Rs.next()){
                 Cliente cliente = new Cliente();
+                Filial filial = new Filial();
                 cliente.setIdCliente(Rs.getInt("idCliente"));
                 cliente.setNome(Rs.getString("nome"));
                 cliente.setTelefone(Rs.getString("telefone"));
-                cliente.setDataNasc(Rs.getString("dataNasc"));
+                cliente.setDataNasc(Rs.getDate("dataNasc"));
                 cliente.setNumCartMotorista(Rs.getString("numCartMotorista"));
                 cliente.setCpf(Rs.getString("cpf"));
                 cliente.setEndereco(Rs.getString("endereco"));
-                cliente.setIdFilial(Rs.getInt("idFilial"));
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                cliente.setFilial(filial);
                 clientes.add(cliente);
                 
                 
@@ -288,14 +303,16 @@ public class ReservaDAO {
             clientes = new ArrayList<Cliente>();
             while(Rs.next()){
                 Cliente cliente = new Cliente();
+                Filial filial = new Filial();
                 cliente.setIdCliente(Rs.getInt("idCliente"));
                 cliente.setNome(Rs.getString("nome"));
                 cliente.setTelefone(Rs.getString("telefone"));
-                cliente.setDataNasc(Rs.getString("dataNasc"));
+                cliente.setDataNasc(Rs.getDate("dataNasc"));
                 cliente.setNumCartMotorista(Rs.getString("numCartMotorista"));
                 cliente.setCpf(Rs.getString("cpf"));
                 cliente.setEndereco(Rs.getString("endereco"));
-                cliente.setIdFilial(Rs.getInt("idFilial"));
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                cliente.setFilial(filial);
                 clientes.add(cliente);
                 
                 

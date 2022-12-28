@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import voceAluga.model.Cliente;
@@ -38,11 +39,11 @@ public class ClienteDAO {
        PreparedStatement statement = connection.prepareStatement(sql);
        statement.setString(1, cliente.getNome());
        statement.setString(2, cliente.getTelefone());
-       statement.setString(3,cliente.getDataNasc());
+       statement.setDate(3, new Date(cliente.getDataNasc().getTime()));
        statement.setString(4, cliente.getNumCartMotorista());
        statement.setString(5, cliente.getCpf());
        statement.setString(6,cliente.getEndereco());
-       statement.setInt(7,cliente.getIdFilial());
+       statement.setInt(7,cliente.getFilial().getIdFilial());
        statement.execute();
        connection.close();
         
@@ -61,14 +62,16 @@ public class ClienteDAO {
             clientes = new ArrayList<Cliente>();
             while(Rs.next()){
                 Cliente cliente = new Cliente();
+                Filial filial = new Filial();
                 cliente.setIdCliente(Rs.getInt("idCliente"));
                 cliente.setNome(Rs.getString("nome"));
                 cliente.setTelefone(Rs.getString("telefone"));
-                cliente.setDataNasc(Rs.getString("dataNasc"));
+                cliente.setDataNasc(Rs.getDate("dataNasc"));
                 cliente.setNumCartMotorista(Rs.getString("numCartMotorista"));
                 cliente.setCpf(Rs.getString("cpf"));
                 cliente.setEndereco(Rs.getString("endereco"));
-                cliente.setIdFilial(Rs.getInt("idFilial"));
+                filial.setIdFilial(Rs.getInt("idFilial"));
+                cliente.setFilial(filial);
                 clientes.add(cliente);
                 
                 
@@ -101,7 +104,7 @@ public class ClienteDAO {
        statement = connection.prepareStatement(sql);
        statement.setString(1, cliente.getNome());
        statement.setString(2, cliente.getTelefone());
-       statement.setString(3,cliente.getDataNasc());
+       statement.setDate(3, new Date(cliente.getDataNasc().getTime()));
        statement.setString(4, cliente.getNumCartMotorista());
        statement.setString(5, cliente.getCpf());
        statement.setString(6,cliente.getEndereco());

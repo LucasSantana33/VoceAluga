@@ -6,6 +6,9 @@
 package voceAluga.view;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -21,7 +24,7 @@ import voceAluga.dao.Exceptiondao;
  *
  * @author lucas
  */
-public class TelaCadCliente extends javax.swing.JFrame {
+public class TelaCadastroCliente extends javax.swing.JFrame {
     private final clienteController controller;
     private static int idCliente=0;
 
@@ -29,7 +32,7 @@ public class TelaCadCliente extends javax.swing.JFrame {
     /**
      * Creates new form TelaCadCliente
      */
-    public TelaCadCliente() {
+    public TelaCadastroCliente() {
         initComponents();
         controller = new clienteController(this);
     }
@@ -289,13 +292,15 @@ public class TelaCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldDtNascimentoActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-          if(this.idCliente==0){
+        if(this.idCliente==0){
         try {
             controller.insere();
             limpaCampos();
         } catch (SQLException ex) {
-            Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }   catch (ParseException ex) {
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }                                             
         else{
@@ -303,10 +308,12 @@ public class TelaCadCliente extends javax.swing.JFrame {
                 controller.alterarCliente(idCliente);
                 limpaCampos();
             } catch (SQLException ex) {
-                Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exceptiondao ex) {
-                  Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
-              }
+                  Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (ParseException ex) {
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -332,9 +339,9 @@ public class TelaCadCliente extends javax.swing.JFrame {
                 controller.deletarCliente(idCliente);
                 limpaCampos();
             } catch (SQLException ex) {
-                Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exceptiondao ex) {
-                Logger.getLogger(TelaCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -344,11 +351,12 @@ public class TelaCadCliente extends javax.swing.JFrame {
         telaconsultacliente.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConsultar1ActionPerformed
-    public void buscarCliente(Integer idCliente,String nome,String telefone,String dataNasc,String cnh,String cpf,String endereco){
+    public void buscarCliente(Integer idCliente,String nome,String telefone,Date dataNasc,String cnh,String cpf,String endereco){
         this.idCliente=idCliente;
         this.jTextFieldNome.setText(nome);
         this.jFormattedTextFieldTelefone.setText(telefone);
-        this.jFormattedTextFieldDtNascimento.setText(dataNasc);
+        SimpleDateFormat mask = new SimpleDateFormat("dd/MM/yyyy");
+        this.jFormattedTextFieldDtNascimento.setText(mask.format(dataNasc));
         this.jFormattedTextFieldCnh.setText(cnh);
         this.jFormattedTextFieldCpf.setText(cpf);
         this.jTextFieldEndereco.setText(endereco);
@@ -371,20 +379,21 @@ public class TelaCadCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadCliente().setVisible(true);
+                new TelaCadastroCliente().setVisible(true);
             }
         });
     }
