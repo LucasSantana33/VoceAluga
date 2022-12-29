@@ -99,7 +99,11 @@ public class TelaLocacao extends javax.swing.JFrame {
         jLabelEndereco.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEndereco.setText("valor Reserva:");
 
-        jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        try {
+            jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextFieldDtEntrega.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jFormattedTextFieldDtEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,12 +250,14 @@ public class TelaLocacao extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableConsultaVeiculo);
 
+        jButtonConsultarVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa2.png"))); // NOI18N
         jButtonConsultarVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConsultarVeiculoConsultarVeiculo(evt);
             }
         });
 
+        jButtonConsultarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa2.png"))); // NOI18N
         jButtonConsultarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConsultarClientesActionPerformed(evt);
@@ -289,8 +295,8 @@ public class TelaLocacao extends javax.swing.JFrame {
                         .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
                                 .addComponent(jTextFieldTituloVeiculo)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonConsultarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonConsultarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -313,8 +319,9 @@ public class TelaLocacao extends javax.swing.JFrame {
                             .addComponent(jLabelNomeCliente)
                             .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
                                 .addComponent(jTextFieldNomeCliente)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonConsultarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonConsultarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4))))
                     .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
                         .addGap(438, 438, 438)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -324,7 +331,7 @@ public class TelaLocacao extends javax.swing.JFrame {
             jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(1, 1, 1)
@@ -332,19 +339,16 @@ public class TelaLocacao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonConsultarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroReservaLayout.createSequentialGroup()
-                        .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonConsultarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabelConsultaVeiculo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldTituloVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26)))
+                            .addComponent(jTextFieldNomeCliente))
+                        .addGap(17, 17, 17))
+                    .addGroup(jPanelCadastroReservaLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabelConsultaVeiculo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldTituloVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonConsultarVeiculo))
+                        .addGap(16, 16, 16)))
                 .addGroup(jPanelCadastroReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
