@@ -46,7 +46,6 @@ CREATE TABLE Reserva (
 	idVeiculo int,
 	idFilial int,
 	idCliente int,
-    FOREIGN KEY (filialRetirada) REFERENCES Filial (idFilial),
 	FOREIGN KEY (idVeiculo) REFERENCES Veiculo (idVeiculo),
 	FOREIGN KEY (idFilial) REFERENCES Filial (idFilial),
 	FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)

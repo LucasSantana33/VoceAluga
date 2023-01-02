@@ -36,62 +36,72 @@ public class clienteController {
     
     }
 
-    public void insere() throws SQLException, ParseException {
-        // Buscar um Usuário da view
-        String nome = view.getjTextFieldNome().getText();
-        String telefone = view.getjFormattedTextFieldTelefone().getText();
-        String dataNasc = view.getjFormattedTextFieldDtNascimento().getText();
-        String numCartMotorista = view.getjFormattedTextFieldCnh().getText();
-        String cpf = view.getjFormattedTextFieldCpf().getText();
-        String endereco = view.getjTextFieldEndereco().getText();
+    public boolean insere(String nome, String telefone, String dataNasc,
+            String numCartMotorista, String cpf, String endereco) throws
+            SQLException, ParseException {
+        
         int idFilial = id_filial;
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dataNasc);
+        if (nome != null && nome.length() > 0 && validarTelefone(telefone) &&
+            validarData(dataNasc) && numCartMotorista != null &&
+            numCartMotorista.length() > 0 && validarCPF(cpf) && endereco != null
+            && endereco.length() > 0 && idFilial > 0) {
         
-        Cliente clienteInsert = new Cliente(nome, telefone, data, numCartMotorista, cpf, endereco, idFilial);
-        // verificar se existe no Banco de dados
-        try{
-        Connection conexao = new conexao().getConnection();
-        ClienteDAO clienteDao = new ClienteDAO(conexao);
-        clienteDao.insert(clienteInsert);
-        JOptionPane.showMessageDialog(null,"Cliente Salvo com sucesso!!!");
-        }catch(SQLException ex) {
-            Logger.getLogger(TelaLogin3.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date data = formato.parse(dataNasc);
         
+            Cliente clienteInsert = new Cliente(nome, telefone, data, numCartMotorista, cpf, endereco, idFilial);
+        
+            try{
+                Connection conexao = new conexao().getConnection();
+                ClienteDAO clienteDao = new ClienteDAO(conexao);
+                clienteDao.insert(clienteInsert);
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLogin3.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
         }
+        return false;
+        
+    }
     
      public ArrayList<Cliente> listarClientes(String nome)throws Exceptiondao, SQLException{
         return new Cliente().listarClientes(nome);
     }
-     public void alterarCliente(int idCliente) throws SQLException, Exceptiondao, ParseException {
-        String nome = view.getjTextFieldNome().getText();
-        String telefone = view.getjFormattedTextFieldTelefone().getText();
-        String dataNasc = view.getjFormattedTextFieldDtNascimento().getText();
-        String numCartMotorista = view.getjFormattedTextFieldCnh().getText();
-        String cpf = view.getjFormattedTextFieldCpf().getText();
+    
+    public boolean alterarCliente (int idCliente, String nome, String telefone,
+        String dataNasc, String numCartMotorista, String cpf, String endereco)
+        throws SQLException, Exceptiondao, ParseException {
+        
         int idFilial =id_filial;
-        String endereco = view.getjTextFieldEndereco().getText() ;
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dataNasc);
+        if (idCliente > 0 && nome != null && nome.length() > 0 &&
+            validarTelefone(telefone) && validarData(dataNasc) &&
+            numCartMotorista != null && numCartMotorista.length() > 0 &&
+            validarCPF(cpf) && endereco != null && endereco.length() > 0 &&
+            idFilial > 0) {
         
-        Cliente cliente = new Cliente(nome,telefone,data,numCartMotorista,cpf,endereco,idFilial);
-        // verificar se existe no Banco de dados
-        try{
-        Connection conexao = new conexao().getConnection();
-        ClienteDAO clienteDao = new ClienteDAO(conexao);
-        cliente.setIdCliente(idCliente);
-        clienteDao.AlterarCliente(cliente);
-        JOptionPane.showMessageDialog(null,"cliente Cadastrado com sucesso!!!");
-        //JOptionPane.showMessageDialog(null,id_filial);
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar veiculo!!!");
-            Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date data = formato.parse(dataNasc);
+        
+            Cliente cliente = new Cliente(nome,telefone,data,numCartMotorista,cpf,endereco,idFilial);
+        
+            try{
+                Connection conexao = new conexao().getConnection();
+                ClienteDAO clienteDao = new ClienteDAO(conexao);
+                cliente.setIdCliente(idCliente);
+                clienteDao.AlterarCliente(cliente);
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
         }
+        return false;
         
-        }
+    }
+     
      public void deletarCliente(int idCliente) throws SQLException, Exceptiondao {
         Cliente cliente = new Cliente();
         // verificar se existe no Banco de dados
@@ -108,4 +118,40 @@ public class clienteController {
         }
         
         }
+
+    public boolean validarCPF(String cpf) {
+        if (cpf != null && cpf.length() > 0) {
+            for(int i = 0; i < cpf.length(); i++) {
+                if (! Character.isDigit(cpf.charAt(i)) && i != 3 && i != 7 && i != 11) {
+                    return false;     
+                }
+            }
+            return true;
+        }
+        return false;
+    }   
+    
+    public boolean validarData(String dtNascimento) {
+        if (dtNascimento != null && dtNascimento.length() > 0) {
+            for(int i = 0; i < dtNascimento.length(); i++) {
+                if (! Character.isDigit(dtNascimento.charAt(i)) && i != 2 && i != 5) {
+                    return false;     
+                }
+            }
+            return true; 
+        }
+        return false;   
     }
+
+    public boolean validarTelefone(String telefone) {
+        if (telefone != null && telefone.length() > 0) {
+            for(int i = 0; i < telefone.length(); i++) {
+                if (! Character.isDigit(telefone.charAt(i)) && i != 2 && i != 8) {
+                    return false;     
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+}
