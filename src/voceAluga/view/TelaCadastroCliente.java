@@ -26,7 +26,7 @@ import voceAluga.dao.Exceptiondao;
  */
 public class TelaCadastroCliente extends javax.swing.JFrame {
     private final clienteController controller;
-    private static int idCliente=0;
+    private static int idCliente = 0;
 
 
     /**
@@ -292,28 +292,36 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldDtNascimentoActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        if(this.idCliente==0){
-        try {
-            controller.insere();
-            limpaCampos();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }   catch (ParseException ex) {
-                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
         
-    }                                             
-        else{
-            try {
-                controller.alterarCliente(idCliente);
-                limpaCampos();
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exceptiondao ex) {
-                  Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-              } catch (ParseException ex) {
-                Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        String nome = jTextFieldNome.getText();
+        String telefone = jFormattedTextFieldTelefone.getText();
+        String dataNasc = jFormattedTextFieldDtNascimento.getText();
+        String numCartMotorista = jFormattedTextFieldCnh.getText();
+        String cpf = jFormattedTextFieldCpf.getText();
+        String endereco = jTextFieldEndereco.getText();
+        boolean sucesso;
+        
+        try {
+            if (this.idCliente == 0) {
+                sucesso = controller.insere(nome, telefone, dataNasc, numCartMotorista, cpf, endereco);
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null,"O cadastro foi realizado com sucesso!");
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente!");
+                }
+            } else {
+                sucesso = controller.alterarCliente(idCliente, nome, telefone, dataNasc, numCartMotorista, cpf, endereco);
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null, "A alteração foi realizada com sucesso!");
+                    idCliente = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente!");
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro " + ex);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
