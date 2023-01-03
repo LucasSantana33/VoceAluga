@@ -274,26 +274,51 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        if(this.idVeiculo==0){
-        try {
-            controller.insere();
-            limpaCampos();
+        
+        String modelo = jTextFieldModelo.getText();
+        String cor = jTextFieldCor.getText();
+        int qtdLugares;
+        if (!jTextFieldqtdLugares.getText().isEmpty()) {
+            qtdLugares = Integer.parseInt(jTextFieldqtdLugares.getText());
+        } else {
+            qtdLugares = 0;
+        }
+        String fabricante = jTextFieldFabricante.getText();
+        String placa = jTextFieldPlaca.getText();
+        double valorDiaria;
+        if (!jTextFieldValorDiaria.getText().isEmpty()) {
+            valorDiaria = Double.parseDouble(jTextFieldValorDiaria.getText());
+        } else {
+            valorDiaria = 0;
+        }
+        boolean sucesso;
+
+        try {        
+            if (this.idVeiculo == 0){
+                sucesso = controller.insere(modelo, cor, qtdLugares, fabricante, placa, valorDiaria);
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null,"O cadastro foi realizado com sucesso!");
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null,"Os campos não foram preenchidos corretamente!");
+                }
+            } else {
+                sucesso = controller.alterarVeiculo(idVeiculo, modelo, cor, qtdLugares, fabricante, placa, valorDiaria);
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null, "A alteração foi realizada com sucesso!");
+                    idVeiculo = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente!");
+                }
+            }
         } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro " + ex);
+        } catch (Exceptiondao ex) {
             Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
-        else{
-            try {
-                controller.alterarVeiculo(idVeiculo);
-                limpaCampos();
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exceptiondao ex) {
-                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+        
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         idVeiculo=0;
        TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();

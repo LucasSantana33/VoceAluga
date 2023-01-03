@@ -27,9 +27,9 @@ import voceAluga.model.Veiculo;
  * @author lucas
  */
 public class TelaLocacao extends javax.swing.JFrame {
-    private static  int idVeiculo=0;
-    private static  int idCliente=0;
-    private static int idReserva=0;
+    private static int idVeiculo = 0;
+    private static int idCliente = 0;
+    private static int idReserva = 0;
     private final reservaController controller;
     /**
      * Creates new form TelaLocacao
@@ -100,7 +100,7 @@ public class TelaLocacao extends javax.swing.JFrame {
         jLabelEndereco.setText("valor Reserva:");
 
         try {
-            jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#####")));
+            jFormattedTextFieldDtEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -162,7 +162,6 @@ public class TelaLocacao extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldDtRetorno.setText("##/##/####");
         jFormattedTextFieldDtRetorno.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jFormattedTextFieldDtRetorno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,32 +414,41 @@ public class TelaLocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldDtEntregaActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-
-    if(idReserva == 0){    
-        try {
-            //JOptionPane.showMessageDialog(null,idVeiculo);    
-            if(idVeiculo > 0 & idCliente>0){
-                controller.insere(idVeiculo, idCliente);
-                controller.alteraEstado(idVeiculo);
-                limpaCampos();
-            }else{JOptionPane.showMessageDialog(null,"Por favor selecione um veiculo e um cliente");}
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }else{try {
-        controller.alterarReserva(idReserva);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exceptiondao ex) {
-            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(TelaLocacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}
         
+        String filialRetorno = jTextFieldFilialRetorno.getText();
+        String dataEntrega = jFormattedTextFieldDtEntrega.getText();
+        String dataRetorno = jFormattedTextFieldDtRetorno.getText();
+        double valorReserva;
+        if (!jTextFieldValorReserva.getText().isEmpty()) {
+            valorReserva = Double.parseDouble(jTextFieldValorReserva.getText());
+        } else {
+            valorReserva = 0;
+        }
+        boolean sucesso;
+
+        try {
+            if(idReserva == 0){
+                sucesso = controller.insere(idVeiculo, idCliente, filialRetorno, dataEntrega, dataRetorno, valorReserva);            
+                if (sucesso) {
+                    controller.alteraEstado(idVeiculo);
+                    JOptionPane.showMessageDialog(null,"O cadastro foi realizado com sucesso!");
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null,"Os campos não foram preenchidos corretamente!");
+                }
+            } else {
+                sucesso = controller.alterarReserva(idReserva, filialRetorno, dataEntrega, dataRetorno, valorReserva);
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null, "A alteração foi realizada com sucesso!");
+                    idReserva = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Os campos não foram preenchidos corretamente!");
+                }
+            }
+        } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro " + ex);
+        }        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
