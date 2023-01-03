@@ -30,56 +30,64 @@ public class veiculoController {
 
     public veiculoController() {
     }
-    public void insere() throws SQLException {
-        String modelo = view1.getjTextFieldModelo().getText();
-        String cor = view1.getjTextFieldCor().getText();
-        int qtdLugares = Integer.parseInt(view1.getjTextFieldqtdLugares().getText());
-        String fabricante = view1.getjTextFieldFabricante().getText();
-        String placa = view1.getjTextFieldPlaca().getText();
-        int idFilial =id_filial;
-        double valorDiaria = Double.parseDouble(view1.getjTextFieldValorDiaria().getText()) ;
-        Veiculo veiculoInsert = new Veiculo(modelo,cor,qtdLugares,fabricante,placa,idFilial,valorDiaria);
-        // verificar se existe no Banco de dados
-        try{
-        Connection conexao = new conexao().getConnection();
-        VeiculoDAO veiculoDao = new VeiculoDAO(conexao);
-        veiculoDao.insert(veiculoInsert);
-        JOptionPane.showMessageDialog(null,"Veiculo Cadastrado com sucesso!!!");
-        //JOptionPane.showMessageDialog(null,id_filial);
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar veiculo!!!");
-            Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public boolean insere(String modelo, String cor, int qtdLugares,
+        String fabricante, String placa, double valorDiaria) throws
+        SQLException {
         
+        int idFilial =id_filial;
+        
+        if (modelo != null && modelo.length() > 0 && cor != null &&
+            cor.length() > 0 && qtdLugares > 0 && fabricante != null &&
+            fabricante.length() > 0 && placa != null && placa.length() > 0 &&
+            valorDiaria > 0) {
+            
+            Veiculo veiculoInsert = new Veiculo(modelo,cor,qtdLugares,fabricante,placa,idFilial,valorDiaria);
+            
+            try{
+                Connection conexao = new conexao().getConnection();
+                VeiculoDAO veiculoDao = new VeiculoDAO(conexao);
+                veiculoDao.insert(veiculoInsert);
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
         }
+        return false;
+    }
     
     public ArrayList<Veiculo> listarVeiculos(String nome)throws Exceptiondao, SQLException{
         return new Veiculo().listarVeiculos(nome);
     }
     
-    public void alterarVeiculo(int idVeiculo) throws SQLException, Exceptiondao {
-        String modelo = view1.getjTextFieldModelo().getText();
-        String cor = view1.getjTextFieldCor().getText();
-        int qtdLugares = Integer.parseInt(view1.getjTextFieldqtdLugares().getText());
-        String fabricante = view1.getjTextFieldFabricante().getText();
-        String placa = view1.getjTextFieldPlaca().getText();
-        int idFilial =id_filial;
-        double valorDiaria = Double.parseDouble(view1.getjTextFieldValorDiaria().getText()) ;
-        Veiculo veiculo = new Veiculo(modelo,cor,qtdLugares,fabricante,placa,idFilial,valorDiaria);
-        // verificar se existe no Banco de dados
-        try{
-        Connection conexao = new conexao().getConnection();
-        VeiculoDAO veiculoDao = new VeiculoDAO(conexao);
-        veiculo.setIdVeiculo(idVeiculo);
-        veiculoDao.AlterarVeiculo(veiculo);
-        JOptionPane.showMessageDialog(null,"Veiculo Cadastrado com sucesso!!!");
-        //JOptionPane.showMessageDialog(null,id_filial);
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar veiculo!!!");
-            Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public boolean alterarVeiculo(int idVeiculo, String modelo, String cor,
+        int qtdLugares, String fabricante, String placa, double valorDiaria)
+        throws SQLException, Exceptiondao {
         
+        int idFilial =id_filial;
+        
+        if (idVeiculo > 0 && modelo != null && modelo.length() > 0 &&
+            cor != null && cor.length() > 0 && qtdLugares > 0 &&
+            fabricante != null && fabricante.length() > 0 && placa != null &&
+            placa.length() > 0 && valorDiaria > 0) {
+        
+            Veiculo veiculo = new Veiculo(modelo,cor,qtdLugares,fabricante,placa,idFilial,valorDiaria);
+        
+            try {
+                Connection conexao = new conexao().getConnection();
+                VeiculoDAO veiculoDao = new VeiculoDAO(conexao);
+                veiculo.setIdVeiculo(idVeiculo);
+                veiculoDao.AlterarVeiculo(veiculo);
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
         }
+        return false;
+    
+    }
+    
      public void deletarVeiculo(int idVeiculo) throws SQLException, Exceptiondao {
         Veiculo veiculo = new Veiculo();
         // verificar se existe no Banco de dados

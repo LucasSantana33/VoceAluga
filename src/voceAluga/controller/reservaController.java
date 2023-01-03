@@ -36,34 +36,37 @@ public class reservaController {
     public reservaController(){
     
     }
-    public void alterarReserva(int idReserva) throws SQLException, Exceptiondao, ParseException {
-        String filialRetorno = view.getjTextFieldFilialRetorno().getText();
-        String dataEntrega = view.getjFormattedTextFieldDtEntrega().getText();
-        String dataRetorno = view.getjFormattedTextFieldDtRetorno().getText();
+    public boolean alterarReserva(int idReserva, String filialRetorno,
+        String dataEntrega, String dataRetorno, double valorReserva) throws
+        SQLException, Exceptiondao, ParseException {
+        
         int idFilial =id_filial;
-        double valorReserva = Double.parseDouble(view.getjTextFieldValorReserva().getText()) ;
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data1 = formato.parse(dataEntrega);
-        Date data2 = formato.parse(dataRetorno);
+        if (idFilial > 0 && filialRetorno != null && filialRetorno.length() > 0
+            && validarData(dataEntrega) && validarData(dataRetorno) &&
+            valorReserva > 0) {
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date data1 = formato.parse(dataEntrega);
+            Date data2 = formato.parse(dataRetorno);
+      
+            Reserva reserva = new Reserva(data1,valorReserva,data2,filialRetorno,id_filial);
         
-        
-        
-        Reserva reserva = new Reserva(data1,valorReserva,data2,filialRetorno,id_filial);
-        // verificar se existe no Banco de dados
-        try{
-        Connection conexao = (Connection) new conexao().getConnection();
-        ReservaDAO reservaDao = new ReservaDAO(conexao);
-        reserva.setIdReserva(idReserva);
-        reservaDao.AlterarReserva(reserva);
-        JOptionPane.showMessageDialog(null,"Locação alterada com sucesso!!!");
-        //JOptionPane.showMessageDialog(null,id_filial);
-        }catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao alterar locação!!!");
-            java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            try{
+                Connection conexao = (Connection) new conexao().getConnection();
+                ReservaDAO reservaDao = new ReservaDAO(conexao);
+                reserva.setIdReserva(idReserva);
+                reservaDao.AlterarReserva(reserva);
+                return true;
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                return false;
+            }
         }
-        
-        }
+        return false;
+    
+    }
+    
     public void alteraEstado(int idVeiculo)throws SQLException{
     try{
             java.sql.Connection conexao = new conexao().getConnection();
@@ -107,37 +110,42 @@ public class reservaController {
         
         }
     
-    public void insere(int idVeiculo,int idCliente) throws SQLException, ParseException {
-        // Buscar um Usuário da view
+    public boolean insere(int idVeiculo, int idCliente, String filialRetorno, 
+        String dtEntrega, String dtRetorno, double valorReserva) throws
+        SQLException, ParseException {
         
-        String filialRetorno = view.getjTextFieldFilialRetorno().getText();
-        String dtEntrega = view.getjFormattedTextFieldDtEntrega().getText();
-        String dtRetorno = view.getjFormattedTextFieldDtRetorno().getText();
-        Float valorReserva = Float.parseFloat(view.getjTextFieldValorReserva().getText());
         int idFilial = id_filial;
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data1 = formato.parse(dtEntrega);
-        Date data2 = formato.parse(dtRetorno);
+        if (idVeiculo > 0 && idCliente > 0 && filialRetorno != null &&
+            filialRetorno.length() > 0 && dtEntrega != null &&
+            dtEntrega.length() > 0 && dtRetorno != null &&
+            dtRetorno.length() > 0 && valorReserva > 0) {
         
-        Reserva reservaInsert = new Reserva(data1,valorReserva,data2,filialRetorno,idFilial);
-        // verificar se existe no Banco de dados
-        try{
-            java.sql.Connection conexao = new conexao().getConnection();
-        ReservaDAO reservaDao = new ReservaDAO(conexao);
-        Veiculo veiculo = new Veiculo();
-        veiculo.setIdVeiculo(idVeiculo);
-        reservaInsert.setVeiculo(veiculo);
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(idCliente);
-        reservaInsert.setCliente(cliente);
-        reservaDao.insert(reservaInsert);
-        JOptionPane.showMessageDialog(null,"Locação Salvo com sucesso!!!");
-        }catch(SQLException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date data1 = formato.parse(dtEntrega);
+            Date data2 = formato.parse(dtRetorno);
         
+            Reserva reservaInsert = new Reserva(data1,valorReserva,data2,filialRetorno,idFilial);
+        
+            try{
+                java.sql.Connection conexao = new conexao().getConnection();
+                ReservaDAO reservaDao = new ReservaDAO(conexao);
+                Veiculo veiculo = new Veiculo();
+                veiculo.setIdVeiculo(idVeiculo);
+                reservaInsert.setVeiculo(veiculo);
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(idCliente);
+                reservaInsert.setCliente(cliente);
+                reservaDao.insert(reservaInsert);
+                return true;
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                return false;
+            }
         }
+        return false;
+    }
+    
     public ArrayList<Reserva> listarReservas(String nome)throws Exceptiondao, SQLException{
         return new Reserva().listarReservas(nome);
     }
@@ -153,4 +161,17 @@ public class reservaController {
       public ArrayList<Cliente> selecionarClientesReserva(Integer idCliente)throws Exceptiondao, SQLException{
         return new Cliente().selecionarClientesReserva(idCliente);
     }
+      
+    public boolean validarData(String data) {
+        if (data != null && data.length() > 0) {
+            for(int i = 0; i < data.length(); i++) {
+                if (! Character.isDigit(data.charAt(i)) && i != 2 && i != 5) {
+                    return false;     
+                }
+            }
+            return true; 
+        }
+        return false;   
+    }
+    
 }

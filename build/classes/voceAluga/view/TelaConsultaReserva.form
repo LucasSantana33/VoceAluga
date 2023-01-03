@@ -155,7 +155,7 @@
                     <Column editable="false" title="id_Veiculo" type="java.lang.Integer"/>
                     <Column editable="false" title="Id Filial" type="java.lang.Integer"/>
                     <Column editable="false" title="id_Cliente" type="java.lang.Integer"/>
-                    <Column editable="true" title="est_Reserva" type="java.lang.String"/>
+                    <Column editable="false" title="est_Reserva" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -3,21 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/dao/conexao.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/view/TelaConsultaReserva.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/view/TelaPrincipalGerente.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/view/TelaLocacao.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/view/TelaConsultaCliente.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/dao/ReservaDAO.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/view/TelaCadastroVeiculo.java</file>
-            <file>file:/C:/Users/lucas/Documentos/VoceAluga/src/voceAluga/view/TelaConsultaVeiculo.java</file>
-=======
-            <file>file:/C:/Users/Raboni/Documents/VoceAluga/src/voceAluga/model/Cliente.java</file>
-            <file>file:/C:/Users/Raboni/Documents/VoceAluga/src/voceAluga/dao/conexao.java</file>
-            <file>file:/C:/Users/Raboni/Documents/VoceAluga/src/voceAluga/controller/clienteController.java</file>
-            <file>file:/C:/Users/Raboni/Documents/VoceAluga/src/voceAluga/view/TelaCadastroCliente.java</file>
->>>>>>> de5caea44e7c6c91ff1bd4f9600bf904771f0adc
         </group>
     </open-files>
 </project-private>

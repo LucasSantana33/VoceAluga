@@ -131,10 +131,10 @@ public class clienteController {
         return false;
     }   
     
-    public boolean validarData(String dtNascimento) {
-        if (dtNascimento != null && dtNascimento.length() > 0) {
-            for(int i = 0; i < dtNascimento.length(); i++) {
-                if (! Character.isDigit(dtNascimento.charAt(i)) && i != 2 && i != 5) {
+    public boolean validarData(String data) {
+        if (data != null && data.length() > 0) {
+            for(int i = 0; i < data.length(); i++) {
+                if (! Character.isDigit(data.charAt(i)) && i != 2 && i != 5) {
                     return false;     
                 }
             }
