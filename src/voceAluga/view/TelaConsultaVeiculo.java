@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -23,12 +24,16 @@ import static voceAluga.view.TelaCadastroVeiculo.idVeiculo;
  */
 public class TelaConsultaVeiculo extends javax.swing.JFrame {
 
+    private TelaCadastroVeiculo telaCadastro;
     
     public TelaConsultaVeiculo() {
         initComponents();
     }
     
-    
+    public TelaConsultaVeiculo(TelaCadastroVeiculo telaCadastro) {
+        this.telaCadastro = telaCadastro;
+        initComponents();
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -42,7 +47,7 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
         jTableConsultaVeiculo = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -119,10 +124,11 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
             jPanelConsultaVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaVeiculoLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(jPanelConsultaVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelConsultaVeiculo)
-                    .addComponent(jTextFieldTituloVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConsultarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelConsultaVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonConsultarVeiculo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelConsultaVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelConsultaVeiculo)
+                        .addComponent(jTextFieldTituloVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
@@ -186,7 +192,7 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
 
     private void Fechar_Janela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Fechar_Janela
         this.dispose();
-        TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
+        this.telaCadastro.setVisible(true);
         
         //cadastroVeiculo.setVisible(true);
     }//GEN-LAST:event_Fechar_Janela
@@ -200,9 +206,9 @@ public class TelaConsultaVeiculo extends javax.swing.JFrame {
             String fabricante = (String) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),4);
             String placa = (String) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),5);
             double valorDiaria = (double) jTableConsultaVeiculo.getModel().getValueAt(jTableConsultaVeiculo.getSelectedRow(),7);
-            TelaCadastroVeiculo cadastroVeiculo= new TelaCadastroVeiculo();
-            cadastroVeiculo.buscarVeiculo(idVeiculo, modelo, cor, qtdLugares, fabricante, placa, valorDiaria);
-            cadastroVeiculo.setVisible(true);
+            
+            telaCadastro.buscarVeiculo(idVeiculo, modelo, cor, qtdLugares, fabricante, placa, valorDiaria);
+            telaCadastro.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jTableConsultaVeiculoMouseClicked

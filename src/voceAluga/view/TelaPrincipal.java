@@ -9,12 +9,12 @@ package voceAluga.view;
  *
  * @author lucas
  */
-public class TelaPrincipalGerente extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaiPrincipal2
      */
-    public TelaPrincipalGerente() {
+    public TelaPrincipal() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logotipo-profissional.jpg"))); // NOI18N
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logotipo-profissional.png"))); // NOI18N
 
         jMenuLocacao.setText("Locação");
         jMenuLocacao.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -142,7 +142,7 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemVeiculoActionPerformed
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
-        TelaLogin3 telalogin = new TelaLogin3();
+        TelaLogin telalogin = new TelaLogin();
         telalogin.setVisible(true);
         this.dispose();
     // TODO add your handling code here:
@@ -181,14 +181,18 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipalGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -197,7 +201,7 @@ public class TelaPrincipalGerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipalGerente().setVisible(true);
+                new TelaPrincipal().setVisible(true);
             }
         });
     }

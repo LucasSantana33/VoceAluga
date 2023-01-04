@@ -200,9 +200,9 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabelEndereco, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelCpf, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCadastroClienteLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jFormattedTextFieldDtNascimento)
@@ -211,17 +211,16 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                             .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 116, Short.MAX_VALUE))
+                        .addGap(0, 120, Short.MAX_VALUE))
                     .addGroup(jPanelCadastroClienteLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonConsultar1)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonExcluir)
-                        .addGap(76, 76, 76))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelCadastroClienteLayout.setVerticalGroup(
             jPanelCadastroClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,7 +326,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
             idCliente=0;
-            TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
+            TelaPrincipal telaMenu = new TelaPrincipal();
             telaMenu.setVisible(true);
             this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -355,7 +354,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultar1ActionPerformed
-        TelaConsultaCliente telaconsultacliente = new TelaConsultaCliente();
+        TelaConsultaCliente telaconsultacliente = new TelaConsultaCliente(this);
         telaconsultacliente.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConsultar1ActionPerformed

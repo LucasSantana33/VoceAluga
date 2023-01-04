@@ -10,12 +10,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import voceAluga.controller.veiculoController;
 import voceAluga.dao.Exceptiondao;
-import voceAluga.view.TelaLogin3;
+import voceAluga.view.TelaLogin;
 import voceAluga.view.TelaConsultaVeiculo;
 /**
  *
@@ -168,46 +169,44 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         jPanelCadstroVeiculoLayout.setHorizontalGroup(
             jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelCor)
-                                    .addComponent(jLabelModelo))
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldCor, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldModelo)))
-                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addComponent(jLabelqtdLugares)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldqtdLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelFabricante)
-                                    .addComponent(jLabelPlaca))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldPlaca)))
-                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                                .addComponent(jLabelValorDiaria)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jButtonSalvar)
-                        .addGap(53, 53, 53)
-                        .addComponent(jButtonLimpar)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonCancelar)
-                        .addGap(44, 44, 44)
-                        .addComponent(jButtonConsultar)
+                            .addComponent(jLabelCor)
+                            .addComponent(jLabelModelo))
                         .addGap(29, 29, 29)
-                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldCor, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                            .addComponent(jTextFieldModelo)))
+                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                        .addComponent(jLabelqtdLugares)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldqtdLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFabricante)
+                            .addComponent(jLabelPlaca))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                            .addComponent(jTextFieldPlaca)))
+                    .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonSalvar)
+                            .addComponent(jLabelValorDiaria))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelCadstroVeiculoLayout.createSequentialGroup()
+                                .addComponent(jButtonLimpar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCancelar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonConsultar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanelCadstroVeiculoLayout.setVerticalGroup(
             jPanelCadstroVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +320,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         idVeiculo=0;
-       TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
+       TelaPrincipal telaMenu = new TelaPrincipal();
         telaMenu.setVisible(true);
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -332,7 +331,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        TelaConsultaVeiculo telaconsultaveiculo = new TelaConsultaVeiculo();
+        TelaConsultaVeiculo telaconsultaveiculo = new TelaConsultaVeiculo(this);
         telaconsultaveiculo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConsultarActionPerformed

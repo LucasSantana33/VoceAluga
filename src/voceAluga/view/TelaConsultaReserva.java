@@ -52,10 +52,13 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
         jTableConsultaReserva = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Você Aluga");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                Fechar_Janela(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 Fechar_Janela(evt);
             }
@@ -200,7 +203,7 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
 
     private void Fechar_Janela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Fechar_Janela
         this.dispose();
-        //this.telaCadCliente.setVisible(true);
+        this.telaCadastroReserva.setVisible(true);
     }//GEN-LAST:event_Fechar_Janela
 
     private void jTableConsultaReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaReservaMouseClicked
@@ -212,9 +215,13 @@ public class TelaConsultaReserva extends javax.swing.JFrame {
             String filialRetorno = (String) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),4);
             int idVeiculo = (Integer) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),5);
             int idCliente = (Integer) jTableConsultaReserva.getModel().getValueAt(jTableConsultaReserva.getSelectedRow(),7);
-            TelaLocacao locacao= new TelaLocacao();
-            locacao.buscarReserva(idReserva, dataEntrega, valorReserva, dataRetorno, filialRetorno,idVeiculo,idCliente);
-            locacao.setVisible(true);
+            
+            if (telaCadastroReserva == null) {
+                telaCadastroReserva = new TelaLocacao();
+            }
+            
+            telaCadastroReserva.buscarReserva(idReserva, dataEntrega, valorReserva, dataRetorno, filialRetorno,idVeiculo,idCliente);
+            telaCadastroReserva.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jTableConsultaReservaMouseClicked

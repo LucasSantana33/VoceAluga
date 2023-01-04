@@ -50,10 +50,13 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         jTableConsultaCliente = new javax.swing.JTable();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Você Aluga");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                Fechar_Janela(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 Fechar_Janela(evt);
             }
@@ -128,10 +131,11 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
             jPanelConsultaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaClienteLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanelConsultaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeCliente)
-                    .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConsultarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelConsultaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonConsultarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelConsultaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelNomeCliente)
+                        .addComponent(jTextFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
@@ -194,7 +198,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
 
     private void Fechar_Janela(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Fechar_Janela
         this.dispose();
-        //this.telaCadCliente.setVisible(true);
+        this.telaCadCliente.setVisible(true);
     }//GEN-LAST:event_Fechar_Janela
 
     private void jTableConsultaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaClienteMouseClicked
@@ -206,9 +210,9 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
             String cnh = (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),4);
             String cpf= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),5);
             String endereco= (String) jTableConsultaCliente.getModel().getValueAt(jTableConsultaCliente.getSelectedRow(),6);
-            TelaCadastroCliente cadastroCliente= new TelaCadastroCliente();
-            cadastroCliente.buscarCliente(idCliente, nome, telefone, dataNasc, cnh, cpf, endereco);
-            cadastroCliente.setVisible(true);
+            
+            telaCadCliente.buscarCliente(idCliente, nome, telefone, dataNasc, cnh, cpf, endereco);
+            telaCadCliente.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jTableConsultaClienteMouseClicked

@@ -18,8 +18,8 @@ import voceAluga.model.Cliente;
 import voceAluga.model.Filial;
 import voceAluga.model.Veiculo;
 import voceAluga.view.TelaCadastroCliente;
-import voceAluga.view.TelaLogin3;
-import voceAluga.view.TelaPrincipalGerente;
+import voceAluga.view.TelaLogin;
+import voceAluga.view.TelaPrincipal;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -58,7 +58,7 @@ public class clienteController {
                 clienteDao.insert(clienteInsert);
                 return true;
             } catch (SQLException ex) {
-                Logger.getLogger(TelaLogin3.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
         }

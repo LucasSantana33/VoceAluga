@@ -11,18 +11,18 @@ import javax.swing.JOptionPane;
 import voceAluga.dao.FilialDAO;
 import voceAluga.dao.conexao;
 import voceAluga.model.Filial;  
-import voceAluga.view.TelaLogin3;
-import voceAluga.view.TelaPrincipalGerente;
+import voceAluga.view.TelaLogin;
+import voceAluga.view.TelaPrincipal;
  
 /**
  *
  * @author lucas
  */
 public class loginController {
-    private TelaLogin3 view;
+    private TelaLogin view;
     static int id_filial=0;
     
-    public loginController(TelaLogin3 view) {
+    public loginController(TelaLogin view) {
         this.view = view;
     }
 
@@ -41,7 +41,7 @@ public class loginController {
         // se existir direciona para menu
         id_filial = filialDao.pegaid(usuarioAutenticar);
         if (existe){
-         TelaPrincipalGerente telaMenu = new TelaPrincipalGerente();
+         TelaPrincipal telaMenu = new TelaPrincipal();
         telaMenu.setVisible(true);
         view.dispose();
         }else{

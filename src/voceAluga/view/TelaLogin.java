@@ -18,7 +18,7 @@ import voceAluga.controller.veiculoController;
  *
  * @author lucas
  */
-public class TelaLogin3 extends javax.swing.JFrame {
+public class TelaLogin extends javax.swing.JFrame {
     
     private final loginController controller;
     
@@ -26,7 +26,7 @@ public class TelaLogin3 extends javax.swing.JFrame {
     /**
      * Creates new form TelaLogin3
      */
-    public TelaLogin3() {
+    public TelaLogin() {
         initComponents();
         controller = new loginController(this);
     }
@@ -62,7 +62,7 @@ public class TelaLogin3 extends javax.swing.JFrame {
         getContentPane().add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 204, 168, 30));
 
         jButtonEntrar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButtonEntrar.setText("entrar");
+        jButtonEntrar.setText("Entrar");
         jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEntrarActionPerformed(evt);
@@ -105,7 +105,7 @@ public class TelaLogin3 extends javax.swing.JFrame {
             // TODO add your handling code here:
             controller.autenticar();
         } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin3.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEntrarActionPerformed
@@ -144,20 +144,21 @@ public class TelaLogin3 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin3().setVisible(true);
+                new TelaLogin().setVisible(true);
             }
         });
     }

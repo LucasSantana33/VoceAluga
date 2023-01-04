@@ -22,7 +22,7 @@ import voceAluga.model.Cliente;
 import voceAluga.model.Reserva;
 import voceAluga.model.Veiculo;
 import voceAluga.view.TelaLocacao;
-import voceAluga.view.TelaLogin3;
+import voceAluga.view.TelaLogin;
 
 /**
  *
@@ -139,7 +139,7 @@ public class reservaController {
                 reservaDao.insert(reservaInsert);
                 return true;
             } catch (SQLException ex) {
-                java.util.logging.Logger.getLogger(TelaLogin3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 return false;
             }
         }

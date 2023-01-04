@@ -13,8 +13,8 @@ import voceAluga.dao.conexao;
 import voceAluga.model.Filial;
 import voceAluga.model.Veiculo;
 import voceAluga.view.TelaCadastroVeiculo;
-import voceAluga.view.TelaLogin3;
-import voceAluga.view.TelaPrincipalGerente;
+import voceAluga.view.TelaLogin;
+import voceAluga.view.TelaPrincipal;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
